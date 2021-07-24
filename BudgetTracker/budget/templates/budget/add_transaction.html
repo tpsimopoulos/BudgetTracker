@@ -1,0 +1,20 @@
+{% extends "budget/base.html" %} 
+{% block links %} 
+{% endblock links %} 
+{% block content %} 
+<div class="d-flex justify-content-center">
+    {% if user.is_authenticated and user.budget %}
+        <form action="" method="POST">
+            {{ form.as_p }}
+            {% csrf_token %} 
+            <input type="submit" value="Submit" />
+        </form>
+    {% elif user.is_authenticated and not user.budget %}
+        <h2>Create a budget to add a transaction.</h2>
+    {% elif not user.is_authenticated %}
+        <h2>Create an account to add a transaction.</h2>
+    {% endif %}
+</div>
+{% endblock content %}
+{% block script %} 
+{% endblock script %}

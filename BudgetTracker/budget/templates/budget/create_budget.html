@@ -1,0 +1,24 @@
+{% extends "budget/base.html" %} 
+{% block content %} 
+<div class="d-flex justify-content-center">
+  {% if user.budget %}
+    <div class="text-center">
+      <h2>Budget already exists for {{ user.username }}</h2>
+      <h3>Only one budget allowed.</h3>
+    </div>
+  {% else %}
+    <form action="" method="POST">
+      {{ form.as_p }}
+      {% csrf_token %} 
+      <input type="submit" value="Submit" />
+    </form>
+  {% endif %}
+</div>
+{% endblock content %}
+{% block script %} 
+  <script>
+    $(document).ready(function() {
+      $('#id-category').select2();
+  });
+  </script>
+{% endblock script %}

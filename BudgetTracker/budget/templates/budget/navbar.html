@@ -1,0 +1,23 @@
+<ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'create_account' %}">Create Account</a>
+      </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'create_budget' %}">Create Budget</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'add_transaction' %}">Add Transaction</a>
+    </li>
+    {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+      </li>
+    {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
+    {% endif %}
+  </ul>
