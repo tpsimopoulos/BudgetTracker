@@ -5,9 +5,15 @@
     <li class="nav-item">
         <a class="nav-link" href="{% url 'create_account' %}">Create Account</a>
       </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'create_budget' %}">Create Budget</a>
-    </li>
+    {% if user.is_authenticated and has_budget %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'edit_budget' %}">Edit Budget</a>
+      </li>
+    {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'add_categories' %}">Create Budget</a>
+      </li>
+    {% endif %}
     <li class="nav-item">
       <a class="nav-link" href="{% url 'add_transaction' %}">Add Transaction</a>
     </li>

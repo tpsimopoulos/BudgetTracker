@@ -13,7 +13,7 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
 class Budget(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     categories = models.ManyToManyField(Category)
     allowance = models.FloatField()
 

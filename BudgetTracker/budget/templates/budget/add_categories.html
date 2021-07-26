@@ -1,0 +1,16 @@
+{% extends "budget/base.html" %} 
+{% block content %} 
+  {% if not user.budget %}
+    <div class="d-flex justify-content-center">
+      <form id="add_category" action="{% url 'add_categories' %}" method="POST">
+        <label for="">Add Categories</label>
+          {{ form.categories }}
+          {% csrf_token %} 
+        <input type="submit" value="Continue"/>
+      </form>
+    </div>
+  {% endif %}
+{% endblock content %}
+{% block script %} 
+<script></script>
+{% endblock script %}

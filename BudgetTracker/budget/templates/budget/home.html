@@ -34,18 +34,36 @@
 {% endblock google_charts %}
 
 {% block content %}
-    {% if user.is_authenticated and user.budget %}
+    {% if user.is_authenticated and has_budget %}
         <h2 class="text-center">Welcome, {{ user.username }}</h2>
         <h3 class="text-center">{{ budget_message }} </h3>
         <h4 class="text-center">{{ remaining_allowance }}</h4>
-        <div id="pie_chart"></div>
-        <div style="width: 400px;">
-            <div id="table_chart"></div>
-        </div>
-    {% elif user.is_authenticated and not user.budget %}
+        {% if pie_data_length <= 1 %}
+            <div id="pie_chart"></div>
+            <div style="width: 400px;">
+                <div id="table_chart"></div>
+            </div>
+            {% for k,v in category_totals.items %}
+                {{ k }}
+                <div style="width: 600px;">
+                    {% if 'over' in budget_message %}
+                        <div class="progress">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" 
+                                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    {% else %}
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%" 
+                                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    {% endif %}
+            {% endfor %}
+        {% endif %}
+            </div>
+    {% elif user.is_authenticated and not has_budget %}
         <h2 class="text-center">Welcome, {{ user.username }}</h2>
         <h3 class="text-center">Start your budget today.</h3>
-        <form class="text-center" action="{% url 'create_budget' %}">
+        <form class="text-center" action="{% url 'add_categories' %}">
             <input type="submit" value="Begin" />
         </form>
     {% else %}

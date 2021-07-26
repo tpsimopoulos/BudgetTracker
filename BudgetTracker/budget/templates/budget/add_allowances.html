@@ -1,0 +1,19 @@
+{% extends "budget/base.html" %}
+{% block content %} 
+<h3>Enter Allowances</h3>
+<form id="add_allowances" action="{% url 'add_allowances' %}" method="POST">
+    {% for cat in categories %} 
+        <div class="d-flex justify-content-center">
+            <label for="">{{cat}}</label>
+                <div class="text-center">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input name="{{cat}}" type="text" class="form-control">
+                    </div>
+                </div>
+        </div>
+    {% endfor %}
+    {% csrf_token %} 
+    <input type="submit" value="Submit" />
+</form>
+{% endblock content %} 

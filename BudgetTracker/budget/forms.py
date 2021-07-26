@@ -1,15 +1,32 @@
 from django import forms
-from .models import Category, Transaction
+from .models import Category, Transaction, Budget
+from django.contrib.auth.models import User
 from django.forms import ModelForm
 
 
-class BudgetForm(forms.Form):
+
+class CategoriesForm(forms.Form):
     categories = forms.ModelMultipleChoiceField(
                         queryset=Category.objects.all(),
-                        to_field_name="category"
+                        to_field_name="category",
+                        widget=forms.SelectMultiple(
+                            attrs={'class':'selectpicker form-control',
+                            'multiple data-live-search':'true',
+                            })
                         )
-    allowance = forms.IntegerField()
+# class AllowanceForm(forms.Form):
+#     allowance = forms.IntegerField(widget=forms.NumberInput(
+#                                 attrs={'class':'form-control'}
+#                         ))
 
+
+class EditBudgetForm(forms.Form):
+    CHOICES = [
+        ('Add Category', 'Add Category'),
+        ('Adjust Allowance', 'Adjust Allowance'),
+        ('Remove Tracked Category', 'Remove Tracked Category')
+    ]
+    actions = forms.ChoiceField(choices=CHOICES, widget=forms.Select(attrs={}))
 
 class CustomDateInput(forms.DateInput):
     input_type = 'date'

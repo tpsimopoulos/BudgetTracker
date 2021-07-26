@@ -1,10 +1,9 @@
 {% extends "budget/base.html" %} 
 {% block content %} 
 {% if user.is_authenticated %}
-<h2>Account already exists for {{user.username}}</h2>
+<h2 class="text-center">Account already exists for {{user.username}}</h2>
 {% else %}
 <div class="d-flex justify-content-center">
-    <h1>Create Account</h1>
     <form action="" method="POST">
         {{ form.as_p }}
         <input type="submit" value="Submit" />
