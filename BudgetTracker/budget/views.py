@@ -12,13 +12,21 @@ def index(request):
         messages.success(request, ("You're account has been created!"))
     
     user = User.objects.get(username=request.user.username)
-    user_transactions = Transaction.objects.filter(user=user)
+    user_transactions = Transaction.objects.filter(user=user.pk)
     
     # Fetching data for Pie Chart
-    pie_transactions = [['Category', 'Amount Spent']]
+    category_totals = {}
     for trx in user_transactions:
-        pie_transactions.append([trx.category.category,
-                                 trx.amount_spent])
+        category = trx.category.category
+        amount_spent = trx.amount_spent 
+        if category in category_totals:
+            category_totals[category] += amount_spent
+        else:
+            category_totals[category] = amount_spent
+    
+    pie_transactions = [['Category', 'Amount Spent']]
+    for k,v in category_totals.items():
+        pie_transactions.append([k,v])
     pie_transactions = json.dumps(pie_transactions)
     
     # Fetching data for Table Chart
@@ -29,9 +37,24 @@ def index(request):
                              trx.amount_spent])
     table_transactions = json.dumps(table_transactions, indent=4, sort_keys=True, default=str)
     
+    # Fetching user's remaining allowance
+    user = User.objects.get(username=request.user.username)
+    budget = Budget.objects.get(user=user)
+    user_transactions = Transaction.objects.filter(user=user)
+    user_transaction_total = 0
+    for transaction in user_transactions:
+        user_transaction_total+=transaction.amount_spent
+    if (budget.allowance < user_transaction_total):
+        budget_message = "You are over your budget."
+    elif (budget.allowance > user_transaction_total):
+        budget_message = "Total remaining allowance."
+    remaining_allowance = budget.allowance - user_transaction_total
+    remaining_allowance = f'${round(remaining_allowance, 2)}'
     return render(request, 'budget/home.html', {'user' : request.user, 
                             'pie_data' : pie_transactions,
-                            'table_data' : table_transactions, })
+                            'table_data' : table_transactions,
+                            'remaining_allowance' : remaining_allowance,
+                            'budget_message' : budget_message, })
 
 def create_budget(request):
     if request.method == "POST":
