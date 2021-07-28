@@ -56,6 +56,8 @@ def index(request):
                 budget_message = "You are over your budget."
             elif (total_allowance > user_transaction_total):
                 budget_message = "Total remaining allowance."
+            else:
+                budget_message = None
             remaining_allowance = total_allowance - user_transaction_total
             remaining_allowance = f'${round(remaining_allowance, 2)}'
 
@@ -109,26 +111,37 @@ def edit_budget(request):
 
 def add_categories(request):
     if request.method == "POST":
-        categories = request.POST.getlist('category')
-            # print('FORM IS VALID')
-            # return render(request, 'budget/add_allowances.html', {'category': category})
+        new_categories = request.POST.getlist('category')
+        for category in new_categories:
+            # if category doesn't exist in Category table, add category
+            if not Category.objects.filter(category=category).exists(): 
+                    new_category = Category(category=category)
+                    new_category.save()
+            # if category exists in Category table
+            budget_category = Category.objects.get(category=category)
+            # if user already has category in Budget table, throw error
+            user = User.objects.get(pk=request.user.pk)
+            users_budget = Budget.objects.filter(user=user)
+            category_in_users_budget = users_budget.filter(categories=budget_category).exists()
+            if category_in_users_budget:
+                messages.error(request, (f"{category} already exists in your budget, please adjust your allowance or remove category instead."))
+                return redirect('edit_budget')
+        return render(request, 'budget/add_allowances.html', {'categories': new_categories})
     else:
-        form = CategoriesForm()
-        print("INSIDE OF ELSE")
-        return render(request, 'budget/add_categories.html', {'form': form})
+        return redirect('edit_budget')
 
 def add_allowances(request):
     if request.method == "POST":
-        for k,v in dict(request.POST).items():
+        for k,v in request.POST.items():
             if 'csrf' not in k:
-                user = User.objects.get(pk=request.user.pk)
-                budget = Budget(user=user, allowance=v[0])
-                budget.save()
-                category = Category.objects.get(category=k)
-                budget.categories.add(category)
+                    user = User.objects.get(pk=request.user.pk)
+                    budget = Budget(user=user, allowance=v)
+                    budget.save()
+                    category = Category.objects.get(category=k)
+                    budget.categories.add(category)
         return redirect('home')
     else: 
-        return render(request, 'budget/add_allowances.html')
+        return redirect('edit_budget')
 
 def adjust_allowance(request):
     pass
