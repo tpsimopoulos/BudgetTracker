@@ -6,7 +6,6 @@
       {{ edit_budget_form.as_p }}
       {% csrf_token %} 
     </form>
-   
 </div>
 <div class="d-flex justify-content-center">
     <form id="add_category" action="{% url 'add_categories' %}" method="POST">
@@ -28,7 +27,7 @@
     </form>
 </div>
 <div class="d-flex justify-content-center">
-    <form id="remove_categories" action="{% url 'remove_categories' %}">
+    <form id="remove_categories" action="{% url 'remove_categories' %}" method="POST">
         <label for="categories">Choose category(s):</label>
         <select class="selectpicker form-control multiple data-live-search"
          name="categories" id="categories" multiple>
@@ -36,9 +35,9 @@
             <option value={{cat}}> {{cat}} </option>
         {% endfor %}
         </select>
+        {% csrf_token %} 
         <br>
         <input type="submit" value="Remove">
-    {% csrf_token %} 
     </form>
 </div>
 {% endblock content %}

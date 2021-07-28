@@ -147,8 +147,16 @@ def adjust_allowance(request):
     pass
 
 def remove_categories(request):
-    pass
-
+    if request.method == "POST":
+        categories_to_delete = request.POST.getlist('categories')
+        user = User.objects.get(pk=request.user.pk)
+        users_budget = Budget.objects.filter(user=user)
+        for category in categories_to_delete:
+            budget_category = Category.objects.get(category=category)
+            category_in_users_budget = users_budget.filter(categories=budget_category).delete()
+        return redirect('edit_budget')
+    else: 
+        return redirect('edit_budget')
 def add_transaction(request):
     if request.method == "POST":
         form = AddTransactionForm(request.POST)
