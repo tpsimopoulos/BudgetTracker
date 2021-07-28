@@ -21,7 +21,11 @@
 </div>
 <div class="d-flex justify-content-center">
     <form id="adjust_allowance" action="{% url 'adjust_allowance' %}" method="POST">
-        <input type="text"/>
+        <label for="category">Choose category:</label>
+        <select class="selectpicker form-control" name="category" id="category" multiple>
+        {% for cat in categories %}
+            <option value={{cat}}> {{cat}} </option>
+        {% endfor %}
         <input type="submit" value="Adjust" />
         {% csrf_token %} 
     </form>
@@ -29,8 +33,7 @@
 <div class="d-flex justify-content-center">
     <form id="remove_categories" action="{% url 'remove_categories' %}" method="POST">
         <label for="categories">Choose category(s):</label>
-        <select class="selectpicker form-control multiple data-live-search"
-         name="categories" id="categories" multiple>
+        <select class="selectpicker form-control" name="categories" id="categories" multiple>
         {% for cat in categories %}
             <option value={{cat}}> {{cat}} </option>
         {% endfor %}

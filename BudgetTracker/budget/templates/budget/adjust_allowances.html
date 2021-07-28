@@ -1,0 +1,20 @@
+{% extends "budget/base.html" %}
+{% block content %} 
+<h3>Enter Adjustments</h3>
+<form id="save_allowance_adjustments" action="{% url 'save_allowance_adjustments' %}" method="POST">
+    {% for k,v in categories_budget_to_adjust.items %} 
+        <div class="d-flex justify-content-center">
+            <label for="">{{k}}</label>
+                <div class="text-center">
+                    <h6>Current Allowance: {{ v }}</h6>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input name="{{ k }}" type="text" class="form-control">
+                    </div>
+                </div>
+        </div>
+    {% endfor %}
+    {% csrf_token %} 
+    <input type="submit" value="Submit" />
+</form>
+{% endblock content %} 

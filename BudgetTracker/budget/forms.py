@@ -13,15 +13,6 @@ class CategoriesForm(forms.Form):
                             'multiple data-live-search':'true',
                             })
                         )
-# class AllowanceForm(forms.Form):
-#     allowance = forms.IntegerField(widget=forms.NumberInput(
-#                                 attrs={'class':'form-control'}
-#                         ))
-
-# class AddCategoryForm(forms.Form):
-#     category = forms.CharField(strip=True) 
-
-# AddCategoryFormSet = formset_factory(AddCategoryForm)
 
 class EditBudgetForm(forms.Form):
     CHOICES = [

@@ -144,7 +144,36 @@ def add_allowances(request):
         return redirect('edit_budget')
 
 def adjust_allowance(request):
-    pass
+    if request.method == "POST":
+        categories_to_adjust = request.POST.getlist('category')
+        #lookup categories and get current allowances for each and append to dict
+        categories_budget_to_adjust = {}
+        for category in categories_to_adjust:
+            budget_category = Category.objects.get(category=category)
+            user = User.objects.get(pk=request.user.pk)
+            users_budget = Budget.objects.filter(user=user)
+            budget_category_details = users_budget.get(categories=budget_category)
+            category_name = budget_category_details.categories.first().category
+            category_allowance = budget_category_details.allowance
+            categories_budget_to_adjust[category_name] = category_allowance
+        return render(request, 'budget/adjust_allowances.html', {'categories_budget_to_adjust':
+                                                                 categories_budget_to_adjust})
+    else: 
+        return redirect('edit_budget')
+
+def save_allowance_adjustments(request):
+    if request.method == "POST":
+        for category, new_allowance in request.POST.items():
+            if 'csrf' not in category:
+                user = User.objects.get(pk=request.user.pk)
+                users_budget = Budget.objects.filter(user=user)
+                budget_category = Category.objects.get(category=category)
+                budget_category_details = users_budget.get(categories=budget_category)
+                budget_category_details.allowance = new_allowance
+                budget_category_details.save()
+        return redirect('edit_budget')
+    else:
+        return redirect('edit_budget')
 
 def remove_categories(request):
     if request.method == "POST":
@@ -157,6 +186,7 @@ def remove_categories(request):
         return redirect('edit_budget')
     else: 
         return redirect('edit_budget')
+
 def add_transaction(request):
     if request.method == "POST":
         form = AddTransactionForm(request.POST)
