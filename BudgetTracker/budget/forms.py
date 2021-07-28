@@ -1,8 +1,7 @@
 from django import forms
 from .models import Category, Transaction, Budget
 from django.contrib.auth.models import User
-from django.forms import ModelForm
-
+from django.forms import ModelForm, formset_factory
 
 
 class CategoriesForm(forms.Form):
@@ -19,6 +18,10 @@ class CategoriesForm(forms.Form):
 #                                 attrs={'class':'form-control'}
 #                         ))
 
+# class AddCategoryForm(forms.Form):
+#     category = forms.CharField(strip=True) 
+
+# AddCategoryFormSet = formset_factory(AddCategoryForm)
 
 class EditBudgetForm(forms.Form):
     CHOICES = [

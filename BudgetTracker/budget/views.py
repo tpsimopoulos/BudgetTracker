@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from .forms import CategoriesForm, AddTransactionForm, EditBudgetForm
+from .forms import AddTransactionForm, EditBudgetForm
 from django.contrib import messages
 from .models import Budget, Category, Transaction
 import datetime
@@ -109,12 +109,12 @@ def edit_budget(request):
 
 def add_categories(request):
     if request.method == "POST":
-        form = CategoriesForm(request.POST)
-        if form.is_valid():
-            categories = request.POST.getlist('categories')
-            return render(request, 'budget/add_allowances.html', {'categories': categories})
+        categories = request.POST.getlist('category')
+            # print('FORM IS VALID')
+            # return render(request, 'budget/add_allowances.html', {'category': category})
     else:
         form = CategoriesForm()
+        print("INSIDE OF ELSE")
         return render(request, 'budget/add_categories.html', {'form': form})
 
 def add_allowances(request):
