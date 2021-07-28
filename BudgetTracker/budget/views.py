@@ -41,8 +41,13 @@ def index(request):
             # Fetching user's remaining allowance
             budgets = Budget.objects.filter(user=user.id)
             total_allowance = 0
+            budgets_dict = {}
             for budget in budgets:
+                budget_category = Category.objects.filter(budget=budget)
+                category = budget_category.first()
+                allowance = budget.allowance
                 total_allowance+=budget.allowance
+                budgets_dict[category] = allowance
             user_transactions = Transaction.objects.filter(user=user)
             user_transaction_total = 0
             for transaction in user_transactions:
@@ -53,15 +58,42 @@ def index(request):
                 budget_message = "Total remaining allowance."
             remaining_allowance = total_allowance - user_transaction_total
             remaining_allowance = f'${round(remaining_allowance, 2)}'
-            
+
+            budget_bars = {}
+            for k,v in budgets_dict.items():
+                k=str(k)
+                budget_bars[k] = {'allowance' : 0}
+                budget_bars[k]['allowance'] = v
+            for k,v in category_totals.items():
+                k=str(k)
+                budget_bars[k]['spent'] = v  
+            # print(budget_bars)
+
+            spent_percentages = {}
+            for k,v in budget_bars.items():
+                # print(k,v)
+                try:
+                    percentage_spent = (v['spent']/v['allowance'])*100
+                    spent_percentages[k] = {'percentage_spent' : 0}
+                    spent_percentages[k]['percentage_spent'] = percentage_spent
+                    spent_percentages[k]['allowance'] = v['allowance']
+                    spent_percentages[k]['spent'] = v['spent']
+                except KeyError:
+                    spent_percentages[k] = {'percentage_spent' : 0}
+                    spent_percentages[k]['allowance'] = v['allowance']
+
             # Fetching data for Bar Charts
             return render(request, 'budget/home.html', {
+                                    'spent_percentages' : spent_percentages,
+                                    'budget_bars' : budget_bars,
                                     'pie_data' : pie_transactions,
-                                    'pie_data_length' : len(pie_transactions),
+                                    'user_transactions' : user_transactions,
                                     'table_data' : table_transactions,
                                     'remaining_allowance' : remaining_allowance,
                                     'budget_message' : budget_message,
                                     'category_totals' : category_totals })
+        else:
+            return render(request, 'budget/home.html')
 
 def edit_budget(request):
     if request.method == "GET":

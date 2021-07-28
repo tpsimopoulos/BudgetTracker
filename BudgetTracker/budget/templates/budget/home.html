@@ -38,28 +38,35 @@
         <h2 class="text-center">Welcome, {{ user.username }}</h2>
         <h3 class="text-center">{{ budget_message }} </h3>
         <h4 class="text-center">{{ remaining_allowance }}</h4>
-        {% if pie_data_length <= 1 %}
+        {{ pie_data_length }}
+        {% if user_transactions %}
             <div id="pie_chart"></div>
             <div style="width: 400px;">
                 <div id="table_chart"></div>
             </div>
-            {% for k,v in category_totals.items %}
-                {{ k }}
-                <div style="width: 600px;">
-                    {% if 'over' in budget_message %}
-                        <div class="progress">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" 
-                                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    {% else %}
-                        <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%" 
-                                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    {% endif %}
+            {% for k,v in spent_percentages.items %}
+                    <span>{{ k }}</span>
+                    <span>${{ v.spent }} out of ${{ v.allowance }}</span>
+                    <div style="width: 600px;">
+                        {% if v.spent > v.allowance %}
+                            <div class="progress">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" 
+                                    aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        {% elif v.spent == v.allowance %}
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" 
+                                    aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        {% else %}
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{v.percentage_spent}}%" 
+                                    aria-valuenow="{{v.percentage_spent}}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        {% endif %}
             {% endfor %}
         {% endif %}
-            </div>
+                    </div>
     {% elif user.is_authenticated and not has_budget %}
         <h2 class="text-center">Welcome, {{ user.username }}</h2>
         <h3 class="text-center">Start your budget today.</h3>
