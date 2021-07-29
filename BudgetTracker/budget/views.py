@@ -25,6 +25,14 @@ def index(request):
                     category_totals[category] += amount_spent
                 else:
                     category_totals[category] = amount_spent
+            ##
+            budgets = Budget.objects.filter(user=user.id)
+            for budget in budgets:
+                budget_category = Category.objects.filter(budget=budget)
+                category = str(budget_category.first())
+                if category not in category_totals:
+                    category_totals[category] = 0
+            ##
             pie_transactions = [['Category', 'Amount Spent']]
             for k,v in category_totals.items():
                 pie_transactions.append([k,v])
@@ -44,7 +52,7 @@ def index(request):
             budgets_dict = {}
             for budget in budgets:
                 budget_category = Category.objects.filter(budget=budget)
-                category = budget_category.first()
+                category = str(budget_category.first())
                 allowance = budget.allowance
                 total_allowance+=budget.allowance
                 budgets_dict[category] = allowance
@@ -63,13 +71,10 @@ def index(request):
 
             budget_bars = {}
             for k,v in budgets_dict.items():
-                k=str(k)
                 budget_bars[k] = {'allowance' : 0}
                 budget_bars[k]['allowance'] = v
             for k,v in category_totals.items():
-                k=str(k)
                 budget_bars[k]['spent'] = v  
-            # print(budget_bars)
 
             spent_percentages = {}
             for k,v in budget_bars.items():
@@ -194,12 +199,18 @@ def add_transaction(request):
             user = User.objects.get(pk=request.user.pk)
             category = request.POST['category']
             category = Category.objects.get(pk=category)
-            transaction_date = request.POST['transaction_date']
-            amount_spent = request.POST['amount_spent']
-            transaction = Transaction(user=user, category=category, transaction_date=transaction_date, amount_spent=amount_spent)
-            transaction.save()
-            messages.success(request, ("Transaction added!"))
-            return redirect('add_transaction')
+            users_budget = Budget.objects.filter(user=user)
+            category_in_users_budget = users_budget.filter(categories=category).exists()
+            if not category_in_users_budget:
+                messages.error(request, (f"{category} doesn't exist in your budget, please add {category} to your budget first."))
+                return redirect('add_transaction')
+            else:
+                transaction_date = request.POST['transaction_date']
+                amount_spent = request.POST['amount_spent']
+                transaction = Transaction(user=user, category=category, transaction_date=transaction_date, amount_spent=amount_spent)
+                transaction.save()
+                messages.success(request, ("Transaction added!"))
+                return redirect('add_transaction')
     else:
         form = AddTransactionForm()
     return render(request, 'budget/add_transaction.html', {'form': form,})
