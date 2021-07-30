@@ -1,0 +1,160 @@
+body {
+    display: flex;
+    min-width: 100%;
+    height: 100vh;
+    /* border: 5px solid peru; */
+    position: relative;
+}
+
+body > ul {
+    /* border: 3px solid purple; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #9BB0A5;
+    min-height: 100%;
+    width: 10%;
+}
+
+li > a {
+    color: #FFFFF0;
+    font-weight: bold;
+}
+
+.navbar_username {
+    display: flex;
+    justify-content: left;
+    margin-left: 1em;
+    font-weight: bold;
+    color: #384B41;
+    margin-top: 2em;
+    /* border: 2px solid blue; */
+}
+
+.navbar_links {
+    margin-top: 1.5em;
+}
+
+.home_container {
+    /* border: 2px solid red; */
+    background-color: #FFFFF0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    width: 100%;
+}
+
+.home_greeting_container {
+    /* border: 2px solid hotpink; */
+    margin-top: 1.5em;
+    color: #384B41;
+    font-weight: bold;
+}
+
+.home_graphs_and_tables {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 2em;
+    border: 3px solid purple;
+    height: 75%;
+}
+
+.pie_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid green; */
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    border-radius: 1.5em;
+    margin-left: 5em;
+    width: 40%;
+}
+
+#pie_chart {
+    /* border: 2px solid red; */
+    margin-left: 3em;
+}
+
+.table_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid red; */
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    margin-left: 5em;
+    width: 40%;
+}
+
+#table_chart {
+    height: 100%;
+    width: 100%;
+}
+
+#table_chart tr {
+    color: #384B41;
+}
+
+.google-visualization-table .gradient {
+    background-image: none !important;
+    background-color: #FFFFF0;
+}
+
+.tableRow {
+    background-color: #FFFFF0;
+}
+
+.oddTableRow {
+    background-color: #9BB0A5;
+}
+
+.budget_bar_container {
+    border: 2px solid blue;
+    border-radius: 1.5em;
+    width: 40%;
+    margin-left: 5em;
+    margin-top: 2em;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    color: #384B41;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.danger {
+    background-color:#384B41; 
+    width: 100%;
+}
+
+.warning {
+    background-color: #9BB0A5 !important;
+}
+
+.success {
+    background-color: #D7FBE8;
+}
+
+.category_and_progress_bar {
+    border: 2px solid green;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.progress_bars {
+    border: 2px solid pink;
+    width: 90%;
+    margin-bottom: .5em;
+}
+
+.budget_bar_category_and_status {
+    border: 2px solid orange;
+    margin-top: 1em;
+    width: 90%;
+    display: flex;
+}
+
+.spent_vs_remaining_amount {
+    /* border: 2px solid black; */
+    margin-left: auto;
+}
