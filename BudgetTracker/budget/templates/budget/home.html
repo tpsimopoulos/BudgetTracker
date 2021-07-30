@@ -65,7 +65,9 @@
                 <div id="table_chart"></div>
             </div>
             <div class="budget_bar_container">
-                {% for k,v in spent_percentages.items %}
+                <div class="budget_bar_container_2">
+                    {% for k,v in spent_percentages.items %}
+                <div class="single_budget_bar_container">
                     <div class="budget_bar_category_and_status">
                         <span>{{ k }}</span>
                         <span class="spent_vs_remaining_amount">${{ v.spent }} out of ${{ v.allowance }}</span> 
@@ -88,7 +90,10 @@
                             </div>
                         {% endif %}
                     </div>
+                </div>
                 {% endfor %}
+                </div>
+                
             </div>
         </div>
         {% endif %}
