@@ -69,6 +69,7 @@ def index(request):
             remaining_allowance = total_allowance - user_transaction_total
             remaining_allowance = f'${round(remaining_allowance, 2)}'
 
+            # Fetching data for Allowance Spent Chart
             budget_bars = {}
             for k,v in budgets_dict.items():
                 budget_bars[k] = {'allowance' : 0}
@@ -78,7 +79,6 @@ def index(request):
 
             spent_percentages = {}
             for k,v in budget_bars.items():
-                # print(k,v)
                 try:
                     percentage_spent = (v['spent']/v['allowance'])*100
                     spent_percentages[k] = {'percentage_spent' : 0}
@@ -89,10 +89,15 @@ def index(request):
                     spent_percentages[k] = {'percentage_spent' : 0}
                     spent_percentages[k]['allowance'] = v['allowance']
 
-            # Fetching data for Bar Charts
+            stacked_bar_data = [['Category', 'Amount Spent', 'Allowance']]
+            for k,v in spent_percentages.items():
+                stacked_bar_data.append([k, v['spent'], v['allowance']])
+            stacked_bar_data = json.dumps(stacked_bar_data)
+
             return render(request, 'budget/home.html', {
                                     'spent_percentages' : spent_percentages,
                                     'budget_bars' : budget_bars,
+                                    'stacked_bar_data' : stacked_bar_data,
                                     'pie_data' : pie_transactions,
                                     'user_transactions' : user_transactions,
                                     'table_data' : table_transactions,
