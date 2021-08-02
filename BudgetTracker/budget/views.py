@@ -69,7 +69,7 @@ def index(request):
             remaining_allowance = total_allowance - user_transaction_total
             remaining_allowance = f'${round(remaining_allowance, 2)}'
 
-            # Fetching data for Allowance Spent Chart
+            # Fetching data for Budgets Close to Allowance Chart
             budget_bars = {}
             for k,v in budgets_dict.items():
                 budget_bars[k] = {'allowance' : 0}
@@ -80,7 +80,7 @@ def index(request):
             spent_percentages = {}
             for k,v in budget_bars.items():
                 try:
-                    percentage_spent = (v['spent']/v['allowance'])*100
+                    percentage_spent = round((v['spent']/v['allowance'])*100, 2)
                     spent_percentages[k] = {'percentage_spent' : 0}
                     spent_percentages[k]['percentage_spent'] = percentage_spent
                     spent_percentages[k]['allowance'] = v['allowance']
@@ -89,14 +89,21 @@ def index(request):
                     spent_percentages[k] = {'percentage_spent' : 0}
                     spent_percentages[k]['allowance'] = v['allowance']
 
+            sorted_spent_percentages = []
+            starting_list = list(spent_percentages.items())
+            while starting_list:
+                max_value = max([x[1]['percentage_spent'] for x in starting_list])    
+                for idx, val in enumerate(starting_list):
+                    if max_value == val[1]['percentage_spent']:
+                        sorted_spent_percentages.append(starting_list.pop(idx))
+
             stacked_bar_data = [['Category', 'Amount Spent', 'Allowance']]
             for k,v in spent_percentages.items():
                 stacked_bar_data.append([k, v['spent'], v['allowance']])
             stacked_bar_data = json.dumps(stacked_bar_data)
 
             return render(request, 'budget/home.html', {
-                                    'spent_percentages' : spent_percentages,
-                                    'budget_bars' : budget_bars,
+                                    'spent_percentages' : dict(sorted_spent_percentages),
                                     'stacked_bar_data' : stacked_bar_data,
                                     'pie_data' : pie_transactions,
                                     'user_transactions' : user_transactions,

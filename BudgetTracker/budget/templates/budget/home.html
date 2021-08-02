@@ -81,7 +81,6 @@
       };
       var chart = new google.visualization.ColumnChart(document.getElementById('stacked_bar_chart'));
       chart.draw(data, options);
-      console.log(JSON.stringify(data, null, 2).replace(/\\/g, ""))
     }
 
  </script>
@@ -97,15 +96,15 @@
         {% if user_transactions %}
         <div class="home_graphs_and_tables">
             <div class="pie_container">
-                <span class="pie_chart_title">Total Spent</span>
+                <span class="pie_chart_title">Total Spent by Percentage</span>
                 <div id="pie_chart"></div>
             </div>
             <div class="stacked_bar_container">
-                <span class="stacked_bar_chart_title">Total Spent</span>
+                <span class="stacked_bar_chart_title">Spending by Category</span>
                 <div id="stacked_bar_chart"></div>
             </div>
             <div class="budget_bar_container">
-                <span class="budget_bar_chart_title">Allowance Spent</span>
+                <span class="budget_bar_chart_title">Budgets Close to Allowance</span>
                 <div class="budget_bar_container_2">
                     {% for k,v in spent_percentages.items %}
                 <div class="single_budget_bar_container">
