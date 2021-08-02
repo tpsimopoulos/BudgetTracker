@@ -1,18 +1,29 @@
+@font-face {
+    font-family: robotoBold;
+    src: url(../../fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf);
+}
+
+@font-face {
+    font-family: robotoRegular;
+    src: url(../../fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf);
+}
+
 body {
-    border: 5px solid peru;
+    /* border: 5px solid peru; */
     height: 100vh;
 }
 
 li > a {
     color: #FFFFF0;
-    font-weight: bold;
+    font-family: robotoBold;
+    font-size: large;
 }
 
 .navbar_username {
     display: flex;
     justify-content: left;
     margin-left: 1em;
-    font-weight: bold;
+    font-family: robotoBold;
     color: #384B41;
     margin-top: 2em;
     /* border: 2px solid blue; */
@@ -24,7 +35,7 @@ li > a {
 
 .app_container {
     display: flex;
-    border: 3px solid black;
+    /* border: 3px solid black; */
     height: 100%;
 }
 
@@ -45,9 +56,9 @@ li > a {
 
 .home_greeting_container {
     /* border: 2px solid hotpink; */
-    margin-top: 1.5em;
+    margin-top: 1em;
     color: #384B41;
-    font-weight: bold;
+    font-family: robotoBold;
 }
 
 .home_graphs_and_tables {
@@ -55,14 +66,15 @@ li > a {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, .5fr);
     grid-gap: 1.5em;
-    border: 3px solid purple;
+    /* border: 3px solid purple; */
 }
 
 .pie_container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-    border: 2px solid green;
+    /* border: 2px solid green; */
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     border-radius: 1.5em;
     margin-left: 1.5em;
@@ -72,7 +84,16 @@ li > a {
 
 #pie_chart {
     /* border: 2px solid red; */
-    margin-left: 3em;
+    margin-left: 1em;
+    margin-top: 2em;
+}
+
+.pie_chart_title {
+    /* border: 1px solid blue; */
+    font-size: 1.25em;
+    font-family: robotoBold;
+    margin-top: 2em;
+    color: #384B41;
 }
 
 .table_container {
@@ -95,6 +116,19 @@ li > a {
 
 #table_chart tr {
     color: #384B41;
+}
+
+.google-visualization-table div:first-child {
+    overflow-y: scroll !important;
+}
+
+.google-visualization-table div:first-child::-webkit-scrollbar {
+    display: none;
+}
+
+.google-visualization-table div:first-child::-webkit-scrollbar {
+    -ms-overflow-style: none; 
+    scrollbar-width: none;  
 }
 
 .google-visualization-table .gradient {
@@ -131,22 +165,27 @@ li > a {
     margin-bottom: 1.5em;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     flex-shrink: 0;
     overflow-y: scroll;
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     height: 40vh;
-    /* width: 40%;
-    margin-left: 5em;
-    margin-top: 2em;
-    color: #384B41;
-    align-content: space-between;
-    overflow: scroll;
-    overflow-y:hidden; */
 }
 
 .budget_bar_container::-webkit-scrollbar {
     display: none;
+}
+
+.budget_bar_container {
+    -ms-overflow-style: none; 
+    scrollbar-width: none;  
+}
+
+.budget_bar_chart_title {
+    font-size: 1.25em;
+    font-family: robotoBold;
+    color: #384B41;
 }
 
 .budget_bar_container_2 {
@@ -178,6 +217,7 @@ li > a {
     /* border: 2px solid orange;
     margin-top: 1em;
     width: 90%; */
+    font-family: robotoRegular;
     display: flex;
 }
 

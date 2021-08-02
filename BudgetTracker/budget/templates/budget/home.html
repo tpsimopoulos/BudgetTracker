@@ -17,11 +17,11 @@
                     'colors': ['#D7FBE8', '#384B41', '#9BB0A5', '#BBDAF2', '#85A4BA', '#2F4858'],
                     'backgroundColor': '#FFFFF0',
                     chartArea: {width: '100%', height: '100%'}, 
-                    titleTextStyle: {
-                        color:'#384B41'
-                    }, 
                     legend: {
-                        textStyle: {color:'#384B41'}
+                        textStyle: {
+                            color:'#384B41',
+                            fontName: 'robotoRegular',
+                        }
                     }, 
                     titlePosition: 'none',
                     is3D: true,
@@ -59,12 +59,14 @@
         {% if user_transactions %}
         <div class="home_graphs_and_tables">
             <div class="pie_container">
+                <span class="pie_chart_title">Total Spent</span>
                 <div id="pie_chart"></div>
             </div>
             <div class="table_container">
                 <div id="table_chart"></div>
             </div>
             <div class="budget_bar_container">
+                <span class="budget_bar_chart_title">Allowance Spent</span>
                 <div class="budget_bar_container_2">
                     {% for k,v in spent_percentages.items %}
                 <div class="single_budget_bar_container">
