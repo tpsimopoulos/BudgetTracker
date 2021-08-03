@@ -43,7 +43,7 @@ def index(request):
             for trx in user_transactions:
                 table_transactions.append([trx.transaction_date, 
                                     trx.category.category,
-                                    trx.amount_spent])
+                                    '${:.2f}'.format(round(trx.amount_spent))])
             table_transactions = json.dumps(table_transactions, indent=4, sort_keys=True, default=str)
 
             # Fetching user's remaining allowance
@@ -67,7 +67,7 @@ def index(request):
             else:
                 budget_message = None
             remaining_allowance = total_allowance - user_transaction_total
-            remaining_allowance = f'${round(remaining_allowance, 2)}'
+            remaining_allowance = '${:.2f}'.format(round(remaining_allowance))
 
             # Fetching data for Budgets Close to Allowance Chart
             budget_bars = {}
@@ -99,11 +99,13 @@ def index(request):
 
             stacked_bar_data = [['Category', 'Amount Spent', 'Allowance']]
             for k,v in spent_percentages.items():
-                stacked_bar_data.append([k, v['spent'], v['allowance']])
+                spent = round(v['spent'], 2)
+                allowance = round(v['allowance'], 2)
+                stacked_bar_data.append([k, spent, allowance])
             stacked_bar_data = json.dumps(stacked_bar_data)
 
             return render(request, 'budget/home.html', {
-                                    'spent_percentages' : dict(sorted_spent_percentages),
+                                    'sorted_spent_percentages' : dict(sorted_spent_percentages),
                                     'stacked_bar_data' : stacked_bar_data,
                                     'pie_data' : pie_transactions,
                                     'user_transactions' : user_transactions,

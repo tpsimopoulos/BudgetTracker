@@ -1,0 +1,91 @@
+.page_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 3em;
+}
+
+h2 {
+    font-family: robotoBold;
+    color: #384B41;
+}
+
+.form_and_title_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50vh;
+    /* border: 1px solid red; */
+}
+
+.form_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+    width: 85%;
+    /* border: 1px solid red; */
+}
+
+.form_fields_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    /* border: 1px solid red; */
+}
+
+.form-control {
+    border-radius: 1em;
+    font-family: robotoRegular;
+}
+
+.fieldWrapper {
+    margin-top: 1em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* border: 1px solid blue; */
+}
+
+.svg_and_form_field {
+    display: flex;
+    align-items: center;
+    /* border: 2px solid turquoise; */
+}
+
+svg {
+    position: absolute;
+    padding-left: .25em;
+    /* border: 1px solid red; */
+
+}
+
+input[value="Submit"] {
+    margin-top: 1em;
+    background-color: #9BB0A5;
+    color: #FFFFF0;
+    font-family: robotoBold;
+    width: 100%;
+    border-radius: 1em;
+}
+
+input:not([value="Submit"]) {
+    text-indent: 1em;
+    /* border: 2px solid green; */
+}
+
+span {
+    font-family: robotoRegular;
+    margin-top: .25em;
+    font-size: small;
+    font-weight: bold;
+    align-self: center;
+    color: #384B41
+}

@@ -2,6 +2,7 @@
 {% block title %}<title>Budget Tracker</title>{% endblock title %}
 {% load static %}
 {% block stylesheet %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/budget/base.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/budget/home.css' %}">
 {% endblock stylesheet %}
 {% block google_charts %}
@@ -17,15 +18,22 @@
         var options = {'title':'Total Spent',
                     'colors': ['#D7FBE8', '#384B41', '#9BB0A5', '#BBDAF2', '#85A4BA', '#2F4858'],
                     'backgroundColor': '#FFFFF0',
-                    chartArea: {width: '100%', height: '100%'}, 
+                    chartArea: {width: '100%', height: '100%'},
+                    pieSliceTextStyle: {
+                        fontSize: 12,
+                        fontName: 'robotoRegular',
+                    }, 
                     legend: {
                         textStyle: {
                             color:'#384B41',
                             fontName: 'robotoRegular',
-                        }
+                            fontSize: 12,
+                        },
+                        alignment: 'center',
                     }, 
                     titlePosition: 'none',
                     is3D: true,
+                    sliceVisibilityThreshold: .07
                 };
         var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
         chart.draw(data, options);
@@ -34,6 +42,8 @@
     function drawTableChart() {
         var data = new google.visualization.arrayToDataTable({{ table_data|safe }});
         var cssClassNames = {
+        'hoverTableRow' : 'hoverTableRow',
+        'headerRow' : 'headerRow',
         'tableRow' : 'tableRow',
         'oddTableRow':'oddTableRow',
         };
@@ -50,7 +60,6 @@
 
     function drawStacked() {
       var data = google.visualization.arrayToDataTable({{ stacked_bar_data|safe }});
-
       var options = {
         width: '100%',
         height: '80%',
@@ -62,18 +71,33 @@
             left: '20%',
         },
         hAxis: {
-            title: 'Category',
             slantedText: true, 
             slantedTextAngle: 65,
+            textStyle: {
+                color:'#384B41',
+                fontName: 'robotoRegular',
+            }
         },
         vAxis: {
-            title: 'Budget vs. Actual',
+            title: 'Allowance vs. Amount Spent',
+            titleTextStyle: {
+                color:'#384B41',
+                fontName: 'robotoRegular',
+                italic: false,
+                bold: true,
+            },
             minValue: 0,
+            textStyle: {
+                color:'#384B41',
+                fontName: 'robotoRegular',
+                bold: true,
+            }
         },
         legend: {
             textStyle: {
                 color:'#384B41',
                 fontName: 'robotoRegular',
+                bold: true,
             }
         }, 
         'colors': ['#D7FBE8', '#384B41', '#9BB0A5', '#BBDAF2', '#85A4BA', '#2F4858'],
@@ -82,7 +106,6 @@
       var chart = new google.visualization.ColumnChart(document.getElementById('stacked_bar_chart'));
       chart.draw(data, options);
     }
-
  </script>
 {% endblock google_charts %}
 
@@ -106,11 +129,11 @@
             <div class="budget_bar_container">
                 <span class="budget_bar_chart_title">Budgets Close to Allowance</span>
                 <div class="budget_bar_container_2">
-                    {% for k,v in spent_percentages.items %}
+                    {% for k,v in sorted_spent_percentages.items %}
                 <div class="single_budget_bar_container">
                     <div class="budget_bar_category_and_status">
                         <span>{{ k }}</span>
-                        <span class="spent_vs_remaining_amount">${{ v.spent }} out of ${{ v.allowance }}</span> 
+                        <span class="spent_vs_remaining_amount">${{ v.spent|stringformat:".2f" }} out of ${{ v.allowance|stringformat:".2f" }}</span> 
                     </div>
                     <div class="progress_bars">
                         {% if v.spent > v.allowance %}
@@ -152,11 +175,3 @@
     {% endif %}
 </div>
 {% endblock content %}
-
-
-60% - background / primary
-30% - text / secondary 
-10% - buttons / accent
-
-all links should be same color
-all buttons should be same color
