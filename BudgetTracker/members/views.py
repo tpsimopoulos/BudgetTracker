@@ -18,7 +18,7 @@ def login_user(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, ("Incorrect password provided."))
+            messages.error(request, ("Incorrect username or password provided."))
             return redirect('login')
     else:
         if 'password_reset' in request.GET:

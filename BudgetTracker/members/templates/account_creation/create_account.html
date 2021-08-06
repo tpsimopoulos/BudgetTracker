@@ -1,6 +1,4 @@
-{% extends "budget/base.html" %} 
-{% load static %} 
-{% block stylesheet %}
+{% extends "budget/base.html" %} {% load static %} {% block stylesheet %}
 <link
   rel="stylesheet"
   type="text/css"
@@ -11,8 +9,7 @@
   type="text/css"
   href="{% static 'css/members/create_account.css' %}"
 />
-{% endblock stylesheet %} 
-{% block content %}
+{% endblock stylesheet %} {% block content %}
 <div class="page_container">
   {% if user.is_authenticated %}
   <h2 class="text-center">Account already exists for {{user.username}}</h2>
@@ -20,83 +17,124 @@
   <div class="form_and_title_container">
     <h2>Create an Acccount</h2>
     <div class="form_container">
-        <form class="form_fields_container" action="" method="POST">
-            {{ form.non_field_errors }}
-            <div class="fieldWrapper">
-                <div class="svg_and_form_field">
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                    class="icon icon-tabler icon-tabler-user" 
-                    width="24" height="24" viewBox="0 0 24 24" 
-                    stroke-width="2" stroke="currentColor" 
-                    fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <circle cx="12" cy="7" r="4" />
-                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                    </svg>
-                    {{ form.username }}
-                </div>
-                
-                {% if form.username.errors %}
-                    {% for error in form.username.errors %}
-                        <span>{{ error|escape }}</span>
-                    {% endfor %}
-                {% endif %}
-            </div>
-            <div class="fieldWrapper">
-                <div class="svg_and_form_field">
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                    class="icon icon-tabler icon-tabler-lock" 
-                    width="24" height="24" viewBox="0 0 24 24" 
-                    stroke-width="2" stroke="currentColor" fill="none"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <rect x="5" y="11" width="14" height="10" rx="2" />
-                    <circle cx="12" cy="16" r="1" />
-                    <path d="M8 11v-4a4 4 0 0 1 8 0v4" />
-                    </svg>
-                    {{ form.password1 }}
-                </div>
-                {% if form.password1.errors %}
-                    {% for error in form.password1.errors %}
-                        <span>{{ error|escape }}</span>
-                    {% endfor %}
-                {% endif %}
-            </div>
-            <div class="fieldWrapper">
-                <div class="svg_and_form_field">
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                    class="icon icon-tabler icon-tabler-lock" 
-                    width="24" height="24" viewBox="0 0 24 24" 
-                    stroke-width="2" stroke="currentColor" fill="none"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <rect x="5" y="11" width="14" height="10" rx="2" />
-                    <circle cx="12" cy="16" r="1" />
-                    <path d="M8 11v-4a4 4 0 0 1 8 0v4" />
-                    </svg>
-                    {{ form.password2 }}
-                </div>
-                
-                {% if form.password2.errors %}
-                {% for error in form.password2.errors %}
-                    <span>{{ error|escape }}</span>
-                {% endfor %}
-            {% endif %}
-            </div>
-            <input type="submit" value="Submit" />
-            {% csrf_token %}
-          </form>
+      <form class="form_fields_container" action="" method="POST">
+        {{ form.non_field_errors }}
+        <div class="fieldWrapper">
+          <div class="svg_and_form_field">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-user"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <circle cx="12" cy="7" r="4" />
+              <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+            </svg>
+            {{ form.username }}
+          </div>
+          {% if form.username.errors %}
+          <div class="username_error_field">
+            <ul>
+              {% for error in form.username.errors %}
+              <li>{{ error|escape }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+        </div>
+        <div class="fieldWrapper">
+          <div class="svg_and_form_field">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-lock"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <rect x="5" y="11" width="14" height="10" rx="2" />
+              <circle cx="12" cy="16" r="1" />
+              <path d="M8 11v-4a4 4 0 0 1 8 0v4" />
+            </svg>
+            {{ form.password1 }}
+          </div>
+          {% if form.password1.errors %}
+          <ul>
+            {% for error in form.password1.errors %}
+            <li>{{ error|escape }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        <div class="fieldWrapper">
+          <div class="svg_and_form_field">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-lock"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <rect x="5" y="11" width="14" height="10" rx="2" />
+              <circle cx="12" cy="16" r="1" />
+              <path d="M8 11v-4a4 4 0 0 1 8 0v4" />
+            </svg>
+            {{ form.password2 }}
+          </div>
+          {% if form.password2.errors %}
+          <div class="password_error_field">
+            <ul>
+              {% for error in form.password2.errors %}
+              <li>{{ error|escape }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+        </div>
+        <input type="submit" value="Submit" />
+        {% csrf_token %}
+      </form>
     </div>
     {% endif %}
   </div>
 </div>
-{% endblock content %}
-{% block script %}
+{% endblock content %} {% block script %}
 <script>
-    $(document).ready(function(){
-        $('#id_username').attr({placeholder:'Username', class:'form-control'});
-        $('#id_password1').attr({placeholder:'Password', class:'form-control'});
-        $('#id_password2').attr({placeholder:'Confirm Password', class:'form-control'});
+  $(document).ready(function () {
+    $("#id_username").attr({ placeholder: "Username", class: "form-control" });
+    $("#id_password1").attr({ placeholder: "Password", class: "form-control" });
+    $("#id_password2").attr({
+      placeholder: "Confirm Password",
+      class: "form-control",
     });
+
+    $("#id_username").on("keyup", function () {
+      $(".username_error_field").remove();
+    });
+    $("#id_password1").on("keyup", function () {
+      $(".password_error_field").remove();
+    });
+    $("#id_password2").on("keyup", function () {
+      $(".password_error_field").remove();
+    });
+  });
 </script>
 {% endblock script %}

@@ -1,69 +1,85 @@
 {% extends "budget/base.html" %} 
+{% load static %} {% block stylesheet %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/budget/base.css' %}"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/budget/edit_budget.css' %}"
+/>
+{% endblock stylesheet %}
 {% block content %} 
-<h3 class="d-flex justify-content-center"></h3>
-<div class="d-flex justify-content-center">
-    <form action="" method="POST">
-      {{ edit_budget_form.as_p }}
-      {% csrf_token %} 
-    </form>
-</div>
-<div class="d-flex justify-content-center">
-    <form id="add_category" action="{% url 'add_categories' %}" method="POST">
-        <div id="input_div">
-            <input id=0 type="text" name="category"/>
-            <button id=0 type="button">-</button>
-        </div>
-        <br id=0>
-        <input type="submit" value="Continue" />
-        <button id="add_another_category" type="button">+</button>
+<div class="page_container">
+    <div class="actions_form">
+        <form action="" method="POST">
+        {{ edit_budget_form.as_p }}
         {% csrf_token %} 
-    </form>
-</div>
-<div class="d-flex justify-content-center">
-    <form id="adjust_allowance" action="{% url 'adjust_allowance' %}" method="POST">
-        <label for="category">Choose category:</label>
-        <select class="selectpicker form-control" name="category" id="category" multiple>
-        {% for cat in categories %}
-            <option value={{cat}}> {{cat}} </option>
-        {% endfor %}
-        <input type="submit" value="Adjust" />
-        {% csrf_token %} 
-    </form>
-</div>
-<div class="d-flex justify-content-center">
-    <form id="remove_categories" action="{% url 'remove_categories' %}" method="POST">
-        <label for="categories">Choose category(s):</label>
-        <select class="selectpicker form-control" name="categories" id="categories" multiple>
-        {% for cat in categories %}
-            <option value={{cat}}> {{cat}} </option>
-        {% endfor %}
-        </select>
-        {% csrf_token %} 
-        <br>
-        <input type="submit" value="Remove">
-    </form>
+        </form>
+    </div>
+    <div class="add_category_form">
+        <form id="add_category" action="{% url 'add_categories' %}" method="POST">
+            <div class="add_category_form_input_and_button" id="input_div">
+                <div class="test_container" id=0>
+                    <input class="form-control" id=0 type="text" name="category"/>
+                    <button id=0 type="button">—</button>
+                </div>
+            </div>
+            <div class="add_category_for_continue_and_add_button">
+                <input type="submit" value="Continue" />
+                <button id="add_another_category" type="button">+</button>
+            </div>
+            {% csrf_token %} 
+        </form>
+    </div>
+    <div class="adjust_allowance_form">
+        <form id="adjust_allowance" action="{% url 'adjust_allowance' %}" method="POST">
+            <label for="category">Choose category:</label>
+            <select class="selectpicker form-control" name="category" id="category" multiple>
+            {% for cat in categories %}
+                <option value={{cat}}> {{cat}} </option>
+            {% endfor %}
+            <input type="submit" value="Adjust" />
+            {% csrf_token %} 
+        </form>
+    </div>
+    <div class="remove_categories_form">
+        <form id="remove_categories" action="{% url 'remove_categories' %}" method="POST">
+            <label for="categories">Choose category(s):</label>
+            <select class="selectpicker form-control" name="categories" id="categories" multiple>
+            {% for cat in categories %}
+                <option value={{cat}}> {{cat}} </option>
+            {% endfor %}
+            </select>
+            {% csrf_token %} 
+            <br>
+            <input type="submit" value="Remove">
+        </form>
+    </div>
 </div>
 {% endblock content %}
 {% block script %} 
   <script>
       $(document).ready(function(){
-        $("#adjust_allowance").hide();
-        $("#add_category").show();
-        $("#remove_categories").hide();
+        $(".adjust_allowance_form").hide();
+        $(".add_category_form").show();
+        $(".remove_categories_form").hide();
         $("select").on("change", function() {
             var option = $("#id_actions").find(":selected").text();
             if (option == "Add Category") {
-                $("#add_category").show();
-                $("#adjust_allowance").hide();
-                $("#remove_categories").hide();
+                $(".add_category_form").show();
+                $(".adjust_allowance_form").hide();
+                $(".remove_categories_form").hide();
             } else if (option == "Adjust Allowance") {
-                $("#adjust_allowance").show();
-                $("#remove_categories").hide();
-                $("#add_category").hide();
+                $(".adjust_allowance_form").show();
+                $(".remove_categories_form").hide();
+                $(".add_category_form").hide();
             } else {
-                $("#remove_categories").show();
-                $("#adjust_allowance").hide();
-                $("#add_category").hide();
+                $(".remove_categories_form").show();
+                $(".adjust_allowance_form").hide();
+                $(".add_category_form").hide();
             }
         });
     });
@@ -71,16 +87,16 @@
   <script>
     $(document).ready(function(){
         var_categories = []
-        clicked_num = 1
+        clicked_num = 0
         $("#add_another_category").on("click", function() {
-            var input_box = `<br id=${clicked_num}><input id=${clicked_num} type="text" name="category"/>\
-                            <button id=${clicked_num} type="button">-</button>`;
-            $("#input_div").append(input_box);
+            var input_box = `<div class="test_container" id=${clicked_num+1}><input class="form-control" id=${clicked_num+1} name="category" type="text" />\
+                            <button id=${clicked_num+1} type="button">—</button></div>`;
+            $(input_box).insertAfter($("div[class=test_container]").last());
             clicked_num+=1
             $("#input_div").find("button").on("click", function() {
+                $(`div[id=${this.id}]`).remove()
                 $(`input[id=${this.id}]`).remove()
                 $(`button[id=${this.id}]`).remove()
-                $(`br[id=${this.id}]`).remove()
             })
         });
     });

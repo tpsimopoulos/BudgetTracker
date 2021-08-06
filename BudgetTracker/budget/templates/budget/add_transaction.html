@@ -11,8 +11,6 @@
         </form>
     {% elif user.is_authenticated and not has_budget %}
         <h2>Create a budget to add a transaction.</h2>
-    {% elif not user.is_authenticated %}
-        <h2>Create an account to add a transaction.</h2>
     {% endif %}
 </div>
 {% endblock content %}
