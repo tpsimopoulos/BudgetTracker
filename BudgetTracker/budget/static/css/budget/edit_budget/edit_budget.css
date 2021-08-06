@@ -1,0 +1,25 @@
+.page_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding-top: 3em;
+    font-family: robotoBold;
+    color: #384b41;
+    border: 1px solid red;
+}
+
+label {
+    font-family: robotoBold;
+    font-size: large;
+    color: #384b41;
+}
+
+#id_actions {
+    font-family: robotoRegular;
+    color: #384b41;
+    cursor: pointer;
+}
+
+

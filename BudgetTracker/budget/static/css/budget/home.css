@@ -9,10 +9,10 @@ svg > g > g:last-child {
 }
 
 .home_greeting_container {
-  /* border: 2px solid hotpink; */
   margin-top: 1em;
   color: #384b41;
   font-family: robotoBold;
+  /* border: 2px solid hotpink; */
 }
 
 .home_graphs_and_tables {
@@ -28,30 +28,29 @@ svg > g > g:last-child {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  /* border: 2px solid green; */
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   border-radius: 1.5em;
   margin-left: 1.5em;
   margin-top: 1.5em;
   height: 40vh;
+  /* border: 2px solid green; */
 }
 
 .pie_chart_title {
-  /* border: 1px solid blue; */
   font-size: 1.25em;
   font-family: robotoBold;
   margin-top: 1em;
   color: #384b41;
+  /* border: 1px solid blue; */
 }
 
 #pie_chart {
-  /* border: 2px solid red; */
   margin-left: 1em;
   margin-top: 2em;
+  /* border: 2px solid red; */
 }
 
 .stacked_bar_container {
-  /* border: 2px solid green; */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -61,21 +60,22 @@ svg > g > g:last-child {
   margin-right: 1.5em;
   margin-top: 1.5em;
   height: 40vh;
+  /* border: 2px solid green; */
 }
 
 .stacked_bar_chart_title {
-  /* border: 1px solid blue; */
   font-size: 1.25em;
   font-family: robotoBold;
   margin-top: 1em;
   color: #384b41;
+  /* border: 1px solid blue; */
 }
 
 #stacked_bar_chart {
-  /* border: 2px solid red; */
   width: 80%;
   height: 90%;
   margin-bottom: 0.5em;
+  /* border: 2px solid red; */
 }
 
 .table_container {
@@ -163,8 +163,8 @@ svg > g > g:last-child {
   align-items: center;
   flex-shrink: 0;
   overflow-y: scroll;
-  /* border: 2px solid blue; */
   height: 40vh;
+  /* border: 2px solid blue; */
 }
 
 .budget_bar_container::-webkit-scrollbar {
@@ -183,7 +183,6 @@ svg > g > g:last-child {
 }
 
 .budget_bar_container_2 {
-  /* border: 2px solid blue; */
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
@@ -192,11 +191,12 @@ svg > g > g:last-child {
   padding-top: 1em;
   padding-bottom: 1em;
   padding-left: 4.5em;
+  /* border: 2px solid blue; */
 }
 
 .single_budget_bar_container {
-  /* border: 2px solid green; */
   width: 80%;
+  /* border: 2px solid green; */
 }
 
 /* 
@@ -208,16 +208,16 @@ svg > g > g:last-child {
 */
 
 .budget_bar_category_and_status {
-  /* border: 2px solid orange;
-    margin-top: 1em;
-    width: 90%; */
-  font-family: robotoRegular;
   display: flex;
+  font-family: robotoRegular;
+  /* border: 2px solid orange;
+  margin-top: 1em;
+  width: 90%; */
 }
 
 .spent_vs_remaining_amount {
-  /* border: 2px solid black; */
   margin-left: auto;
+  /* border: 2px solid black; */
 }
 
 .page_container {
@@ -230,15 +230,14 @@ svg > g > g:last-child {
 }
 
 .logged_in_no_budget_outer_container {
-  /* border: 1px solid red; */
   height: 50vh;
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  /* border: 1px solid red; */
 }
 
 .logged_in_no_budget_container {
-  /* border: 1px solid blue; */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -247,6 +246,7 @@ svg > g > g:last-child {
   margin-bottom: 1em;
   font-family: robotoBold;
   color: #384b41;
+  /* border: 1px solid blue; */
 }
 
 .logged_in_no_budget_container > h2 {

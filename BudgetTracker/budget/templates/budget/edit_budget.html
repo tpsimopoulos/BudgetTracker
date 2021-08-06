@@ -8,7 +8,22 @@
 <link
   rel="stylesheet"
   type="text/css"
-  href="{% static 'css/budget/edit_budget.css' %}"
+  href="{% static 'css/budget/edit_budget/edit_budget.css' %}"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/budget/edit_budget/add_category.css' %}"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/budget/edit_budget/adjust_allowance.css' %}"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/budget/edit_budget/remove_tracked_category.css' %}"
 />
 {% endblock stylesheet %}
 {% block content %} 
@@ -36,7 +51,7 @@
     </div>
     <div class="adjust_allowance_form">
         <form id="adjust_allowance" action="{% url 'adjust_allowance' %}" method="POST">
-            <label for="category">Choose category:</label>
+            <label for="category">Choose category(s):</label>
             <select class="selectpicker form-control" name="category" id="category" multiple>
             {% for cat in categories %}
                 <option value={{cat}}> {{cat}} </option>
@@ -54,7 +69,6 @@
             {% endfor %}
             </select>
             {% csrf_token %} 
-            <br>
             <input type="submit" value="Remove">
         </form>
     </div>
@@ -91,7 +105,11 @@
         $("#add_another_category").on("click", function() {
             var input_box = `<div class="test_container" id=${clicked_num+1}><input class="form-control" id=${clicked_num+1} name="category" type="text" />\
                             <button id=${clicked_num+1} type="button">—</button></div>`;
-            $(input_box).insertAfter($("div[class=test_container]").last());
+            if ($("div[class=test_container]").length) {
+                $(input_box).insertAfter($("div[class=test_container]").last());
+            } else {
+                $("div[id=input_div]").append($(input_box));
+            }
             clicked_num+=1
             $("#input_div").find("button").on("click", function() {
                 $(`div[id=${this.id}]`).remove()

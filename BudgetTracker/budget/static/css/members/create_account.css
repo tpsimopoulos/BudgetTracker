@@ -5,7 +5,7 @@
   align-items: center;
   width: 100%;
   padding-top: 3em;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .form_and_title_container {
@@ -14,7 +14,7 @@
   justify-content: flex-start;
   align-items: center;
   height: 50vh;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 h2 {
@@ -72,11 +72,20 @@ input[value="Submit"] {
   font-family: robotoBold;
   width: 100%;
   border-radius: 1em;
+  border-style: solid;
+  border-color: #9bb0a5;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 
 input:not([value="Submit"]) {
   text-indent: 1em;
   /* border: 2px solid green; */
+}
+
+input:not([value="Submit"]):focus {
+  border: 2px solid #9bb0a5;
+  outline: none;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 
 .error_field {

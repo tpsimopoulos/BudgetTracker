@@ -1,18 +1,42 @@
-{% extends "budget/base.html" %} 
-{% block links %} 
-{% endblock links %} 
-{% block content %} 
-<div class="d-flex justify-content-center">
-    {% if user.is_authenticated and has_budget %}
-        <form action="" method="POST">
-            {{ form.as_p }}
-            {% csrf_token %} 
-            <input type="submit" value="Submit" />
-        </form>
-    {% elif user.is_authenticated and not has_budget %}
-        <h2>Create a budget to add a transaction.</h2>
-    {% endif %}
+{% extends "budget/base.html" %} {% load static %} {% block stylesheet %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/budget/base.css' %}"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/budget/add_transaction.css' %}"
+/>
+{% endblock stylesheet %} {% block links %} {% endblock links %} 
+{% block content %}
+<div class="page_container">
+    <div class="outer_form_container">
+        <h3>Add Transasction</h3>
+        <div class="inner_form_container">
+            {% if user.is_authenticated and has_budget %}
+                <form class="form_fields_container" action="" method="POST">
+                    {{ form.non_field_errors }}
+                    <div class="fieldWrapper">
+                        <label for="">Category</label>
+                        {{form.category}}
+                    </div>
+                    <div class="fieldWrapper">
+                        <label for="">Transaction Date</label>
+                        {{form.transaction_date}}
+                    </div>
+                    <div class="fieldWrapper">
+                        <label for="">Amount Spent</label>
+                        {{form.amount_spent}}
+                    </div>
+                    {% csrf_token %}
+                <input type="submit" value="Add" />
+                </form>
+            {% elif user.is_authenticated and not has_budget %}
+                <h2 class="text-center">Create a budget to add a transaction.</h2>
+            {% endif %}
+        </div>
+    </div>
 </div>
-{% endblock content %}
-{% block script %} 
-{% endblock script %}
+{% endblock content %} {% block script %} {% endblock script %}

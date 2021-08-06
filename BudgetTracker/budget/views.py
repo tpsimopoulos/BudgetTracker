@@ -231,7 +231,11 @@ def add_transaction(request):
                 else:
                     transaction_date = request.POST['transaction_date']
                     amount_spent = request.POST['amount_spent']
-                    transaction = Transaction(user=user, category=category, transaction_date=transaction_date, amount_spent=amount_spent)
+                    transaction = Transaction(
+                                    user=user, 
+                                    category=category, 
+                                    transaction_date=transaction_date, 
+                                    amount_spent=amount_spent)
                     transaction.save()
                     messages.success(request, ("Transaction added!"))
                     return redirect('add_transaction')

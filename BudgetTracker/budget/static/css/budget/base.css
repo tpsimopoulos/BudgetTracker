@@ -9,9 +9,9 @@
 }
 
 body {
-  /* border: 5px solid peru; */
   height: 100vh;
   background-color: #fffff0;
+  /* border: 5px solid peru; */
 }
 
 .app_container {
