@@ -17,7 +17,7 @@
 {% endblock stylesheet %} {% block content %}
 <div class="page_container">
   <div class="form_and_title_container">
-    <h2>Login</h2>
+    <h2 id="login_page_heading">Login</h2>
     <div class="form_container">
       <form class="form_fields_container" action="" method="POST">
         <div class="fieldWrapper">
@@ -77,6 +77,9 @@
         <input type="submit" value="Submit" />
         {% csrf_token %}
       </form>
+      <div class="create_account_link_container">
+        <span>Don't have an account?</span><a class="sign_up_link" href="{% url 'create_account' %}">Sign Up</a>
+      </div>
       {% endblock content %}
     </div>
   </div>

@@ -21,3 +21,16 @@ a:hover {
   font-weight: bold;
   color: #384b41;
 }
+
+.create_account_link_container {
+  display: flex;
+  font-family: robotoRegular;
+  font-size: small;
+  width: 75%;
+  /* border: 1px solid red; */
+}
+
+.sign_up_link {
+  margin-left: .25em;
+  font-family: robotoBold;
+}

@@ -75,6 +75,7 @@ def index(request):
                 # Fetching data for Budgets Close to Allowance Chart
                 budget_bars = {}
                 for k,v in budgets_dict.items():
+                    print(k,v)
                     budget_bars[k] = {'allowance' : 0}
                     budget_bars[k]['allowance'] = v
                 for k,v in category_totals.items():
@@ -107,7 +108,7 @@ def index(request):
                     stacked_bar_data.append([k, spent, allowance])
                 stacked_bar_data = json.dumps(stacked_bar_data)
 
-                return render(request, 'budget/home.html', {
+                return render(request, 'home.html', {
                                         'sorted_spent_percentages' : dict(sorted_spent_percentages),
                                         'stacked_bar_data' : stacked_bar_data,
                                         'pie_data' : pie_transactions,
@@ -132,7 +133,7 @@ def edit_budget(request):
             for budget in budgets:
                 for cat in budget.categories.all():
                     categories.append(str(cat))
-            return render(request, 'budget/edit_budget.html', {'edit_budget_form':edit_budget_form, 
+            return render(request, 'edit_budget.html', {'edit_budget_form':edit_budget_form, 
                                                                 'categories': categories})
         else:
             return redirect('login')
@@ -154,7 +155,7 @@ def add_categories(request):
             if category_in_users_budget:
                 messages.error(request, (f"{category} already exists in your budget, please adjust your allowance or remove category instead."))
                 return redirect('edit_budget')
-        return render(request, 'budget/add_allowances.html', {'categories': new_categories})
+        return render(request, 'add_allowances.html', {'categories': new_categories})
     else:
         return redirect('edit_budget')
 
@@ -184,7 +185,7 @@ def adjust_allowance(request):
             category_name = budget_category_details.categories.first().category
             category_allowance = budget_category_details.allowance
             categories_budget_to_adjust[category_name] = category_allowance
-        return render(request, 'budget/adjust_allowances.html', {'categories_budget_to_adjust':
+        return render(request, 'adjust_allowances.html', {'categories_budget_to_adjust':
                                                                  categories_budget_to_adjust})
     else: 
         return redirect('edit_budget')
@@ -226,7 +227,8 @@ def add_transaction(request):
                 users_budget = Budget.objects.filter(user=user)
                 category_in_users_budget = users_budget.filter(categories=category).exists()
                 if not category_in_users_budget:
-                    messages.error(request, (f"{category} doesn't exist in your budget, please add {category} to your budget first."))
+                    messages.error(request, (f"{category} doesn't exist in your budget, \
+                    please add {category} to your budget first."))
                     return redirect('add_transaction')
                 else:
                     transaction_date = request.POST['transaction_date']
@@ -241,6 +243,6 @@ def add_transaction(request):
                     return redirect('add_transaction')
         else:
             form = AddTransactionForm()
-        return render(request, 'budget/add_transaction.html', {'form': form,})
+        return render(request, 'add_transaction.html', {'form': form,})
     else:
         return redirect('login')
