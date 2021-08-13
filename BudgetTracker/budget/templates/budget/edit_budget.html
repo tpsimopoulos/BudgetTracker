@@ -49,6 +49,7 @@
             {% csrf_token %} 
         </form>
     </div>
+    <span id="error_message">{{ error_message }}</span>
     <div class="adjust_allowance_form">
         <form id="adjust_allowance" action="{% url 'adjust_allowance' %}" method="POST">
             <label for="category">Choose category(s):</label>

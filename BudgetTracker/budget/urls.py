@@ -7,9 +7,11 @@ urlpatterns = [
     path('add_allowances', views.add_allowances, name='add_allowances'),
     path('add_transaction', views.add_transaction, name='add_transaction'),
     path('edit_budget', views.edit_budget, name='edit_budget'),
+    path('edit_budget/<str:category_exists>/<str:category>/', views.edit_budget, name='edit_budget'),
     path('edit_budget/adjust_allowance', views.adjust_allowance, name='adjust_allowance'),
     path('edit_budget/save_allowance_adjustments', views.save_allowance_adjustments, name='save_allowance_adjustments'),
     path('edit_budget/remove_categories', views.remove_categories, name='remove_categories'),
     path('' , views.index, name='home'),
+    path('<str:created>/' , views.index, name='home'),
     # re_path(r'^.*/$' , views.index, name='home'),
 ]

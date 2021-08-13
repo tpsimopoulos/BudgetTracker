@@ -12,7 +12,7 @@
 {% endblock stylesheet %} {% block content %}
 <div class="page_container">
   {% if user.is_authenticated %}
-  <h2 class="text-center">Account already exists for {{user.username}}</h2>
+  <h2 id="has_existing_account_message" class="text-center">Account already exists for {{user.username}}</h2>
   {% else %}
   <div class="form_and_title_container">
     <h2 id="create_account_page_heading">Create an Account</h2>
@@ -127,13 +127,13 @@
     });
 
     $("#id_username").on("keyup", function () {
-      $(".username_error_field").remove();
+      $(".username_error_field").hide();
     });
     $("#id_password1").on("keyup", function () {
-      $(".password_error_field").remove();
+      $(".password_error_field").hide();
     });
     $("#id_password2").on("keyup", function () {
-      $(".password_error_field").remove();
+      $(".password_error_field").hide();
     });
   });
 </script>

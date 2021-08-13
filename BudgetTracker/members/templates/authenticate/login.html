@@ -19,7 +19,7 @@
   <div class="form_and_title_container">
     <h2 id="login_page_heading">Login</h2>
     <div class="form_container">
-      <form class="form_fields_container" action="" method="POST">
+      <form class="form_fields_container" action="{% url 'login_user' %}" method="POST">
         <div class="fieldWrapper">
           <div class="svg_and_form_field">
             <svg
@@ -40,6 +40,7 @@
             </svg>
             <input
               type="username"
+              id="username"
               class="form-control"
               name="username"
               placeholder="Username"
@@ -67,14 +68,17 @@
             </svg>
             <input
               type="password"
+              id="password"
               class="form-control"
               name="password"
               placeholder="Password"
             />
-            <a href="{% url 'reset_password' %}">Forgot Password?</a>
+            <a id=forgot_password_link href="{% url 'reset_password' %}">Forgot Password?</a>
           </div>
         </div>
         <input type="submit" value="Submit" />
+        <span id="error_message">{{error_message}}</span>
+        <span id="password_reset_message">{{password_reset_message}}</span>
         {% csrf_token %}
       </form>
       <div class="create_account_link_container">
@@ -84,3 +88,15 @@
     </div>
   </div>
 </div>
+{% block script %}
+<script>
+  $(document).ready(function () {
+    $("#username").on("keyup", function () {
+      $("#error_message").hide();
+    });
+    $("#password").on("keyup", function () {
+      $("#error_message").hide();
+    });
+  });
+</script>
+{% endblock script %}

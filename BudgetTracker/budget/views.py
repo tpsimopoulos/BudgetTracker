@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.models import User
 from .forms import AddTransactionForm, EditBudgetForm
 from django.contrib import messages
@@ -7,12 +7,9 @@ import datetime
 import json
 
 
-def index(request):
+def index(request, *args, **kwargs):
     if request.method == "GET":
-        if 'created' in request.GET:
-            messages.success(request, ("You're account has been created!"))
-            return render(request, 'budget/home.html')
-        elif request.user.is_authenticated:
+        if request.user.is_authenticated:
             budget = Budget.objects.filter(user=request.user.id)
             has_budget = bool(budget)
             if has_budget:
@@ -75,7 +72,6 @@ def index(request):
                 # Fetching data for Budgets Close to Allowance Chart
                 budget_bars = {}
                 for k,v in budgets_dict.items():
-                    print(k,v)
                     budget_bars[k] = {'allowance' : 0}
                     budget_bars[k]['allowance'] = v
                 for k,v in category_totals.items():
@@ -108,7 +104,7 @@ def index(request):
                     stacked_bar_data.append([k, spent, allowance])
                 stacked_bar_data = json.dumps(stacked_bar_data)
 
-                return render(request, 'home.html', {
+                return render(request, 'budget/home.html', {
                                         'sorted_spent_percentages' : dict(sorted_spent_percentages),
                                         'stacked_bar_data' : stacked_bar_data,
                                         'pie_data' : pie_transactions,
@@ -117,13 +113,12 @@ def index(request):
                                         'remaining_allowance' : remaining_allowance,
                                         'budget_message' : budget_message,
                                         'category_totals' : category_totals })
-        
             else:
                 return render(request, 'budget/home.html', {})
         else:
-            return redirect('login')
+            return redirect('login_user')
 
-def edit_budget(request):
+def edit_budget(request, *args, **kwargs):
     if request.method == "GET":
         if request.user.is_authenticated:
             edit_budget_form = EditBudgetForm()
@@ -133,10 +128,16 @@ def edit_budget(request):
             for budget in budgets:
                 for cat in budget.categories.all():
                     categories.append(str(cat))
-            return render(request, 'edit_budget.html', {'edit_budget_form':edit_budget_form, 
-                                                                'categories': categories})
+            error_message = None
+            if 'category_exists' in kwargs:
+                if kwargs['category_exists'] == "True":
+                    error_message = f"{kwargs['category']} already exists in your budget,\
+                    please adjust your allowance or remove category instead."
+            return render(request, 'budget/edit_budget.html', {'edit_budget_form':edit_budget_form, 
+                                                                'categories': categories,
+                                                                'error_message': error_message})
         else:
-            return redirect('login')
+            return redirect('login_user')
   
 def add_categories(request):
     if request.method == "POST":
@@ -144,8 +145,8 @@ def add_categories(request):
         for category in new_categories:
             # if category doesn't exist in Category table, add category
             if not Category.objects.filter(category=category).exists(): 
-                    new_category = Category(category=category)
-                    new_category.save()
+                new_category = Category(category=category)
+                new_category.save()
             # if category exists in Category table
             budget_category = Category.objects.get(category=category)
             # if user already has category in Budget table, throw error
@@ -153,9 +154,8 @@ def add_categories(request):
             users_budget = Budget.objects.filter(user=user)
             category_in_users_budget = users_budget.filter(categories=budget_category).exists()
             if category_in_users_budget:
-                messages.error(request, (f"{category} already exists in your budget, please adjust your allowance or remove category instead."))
-                return redirect('edit_budget')
-        return render(request, 'add_allowances.html', {'categories': new_categories})
+                return redirect(reverse('edit_budget', kwargs={'category_exists':True, 'category': category}))
+        return render(request, 'budget/add_allowances.html', {'categories': new_categories})
     else:
         return redirect('edit_budget')
 
@@ -185,7 +185,7 @@ def adjust_allowance(request):
             category_name = budget_category_details.categories.first().category
             category_allowance = budget_category_details.allowance
             categories_budget_to_adjust[category_name] = category_allowance
-        return render(request, 'adjust_allowances.html', {'categories_budget_to_adjust':
+        return render(request, 'budget/adjust_allowances.html', {'categories_budget_to_adjust':
                                                                  categories_budget_to_adjust})
     else: 
         return redirect('edit_budget')
@@ -243,6 +243,6 @@ def add_transaction(request):
                     return redirect('add_transaction')
         else:
             form = AddTransactionForm()
-        return render(request, 'add_transaction.html', {'form': form,})
+        return render(request, 'budget/add_transaction.html', {'form': form,})
     else:
-        return redirect('login')
+        return redirect('login_user')
