@@ -1,0 +1,23 @@
+// 1.1 Typography //
+
+@font-face {
+    font-family: robotoBold;
+    src: url(../fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf);
+  }
+  
+@font-face {
+    font-family: robotoRegular;
+    src: url(../fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf);
+}
+  
+$ff-reg: robotoRegular;
+$ff-bold: robotoBold;
+
+
+// 1.2 Colors //
+
+$primary-clr: #fffff0;
+$secondary-clr:#9bb0a5;
+$accent-clr: #384b41;
+  
+$box-shadow: 0 3px 10px rgba(0, 0, 0 , 0.2)

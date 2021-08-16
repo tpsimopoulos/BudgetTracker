@@ -1,0 +1,103 @@
+@use "variables";
+@use "mixins";
+
+.login_container {
+  @include mixins.flexDirectionColumn();
+  width: 100%;
+  padding-top: 3em;
+  // border: 1px solid red;
+}
+
+.form_and_title_container {
+  @include mixins.flexDirectionColumn(flex-start);
+  height: 50vh;
+  border: 1px solid blue; 
+}
+
+
+.form_container {
+  @include mixins.flexDirectionColumn();
+  width: 85%;
+  // border: 1px solid red;
+}
+
+.form_fields_container {
+  @include mixins.flexDirectionColumn();
+  width: 100%;
+  margin-bottom: 3em;
+  // border: 1px solid blue;
+}
+
+.form-control {
+  border-radius: 1em;
+  font-family: variables.$ff-reg;
+}
+
+.fieldWrapper {
+  margin-bottom: 1em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* border: 1px solid blue; */
+}
+
+.svg_and_form_field {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+svg {
+  position: absolute;
+  padding-left: 0.25em;
+
+  &.icon-tabler-lock {
+    align-self: flex-start;
+    margin-top: 0.5em;
+  }
+  /* border: 1px solid red; */
+}
+
+input[value="Submit"] {
+  background-color: variables.$secondary-clr;
+  color: variables.$primary-clr;
+  font-family: variables.$ff-bold;
+  width: 100%;
+  border-radius: 1em;
+  border-style: solid;
+  border-color: variables.$secondary-clr;
+  box-shadow: variables.$box-shadow;
+}
+
+input:not([value="Submit"]) {
+  text-indent: 1em;
+  /* border: 2px solid green; */
+}
+
+input:not([value="Submit"]):focus {
+  border: 2px solid variables.$secondary-clr;
+  outline: none;
+  box-shadow: variables.$box-shadow;
+}
+
+#login_error_message {
+  font-family: variables.$ff-reg;
+  font-size: small;
+  height: 75px;
+  // border: 1px solid blue;
+}
+
+.sign_up_link {
+  font-family: variables.$ff-reg;
+  font-size: small;
+  color: variables.$accent-clr;
+
+  &:hover {
+    font-weight: bold;
+    color: variables.$accent-clr;
+  }
+}
+
+
+

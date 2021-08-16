@@ -7,3 +7,5 @@ media
 
 # pyenv 
 .python-version
+
+node_modules/

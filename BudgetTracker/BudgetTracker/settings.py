@@ -1,3 +1,4 @@
+from django.contrib.messages import constants as message_constants
 from pathlib import Path
 import os 
 
@@ -121,3 +122,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MESSAGE_TAGS = {
+    message_constants.INFO: 'alert alert-success alert-dismissible fade show',
+    message_constants.ERROR: 'alert alert-danger alert-dismissible fade show'
+    }

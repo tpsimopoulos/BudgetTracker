@@ -19,7 +19,9 @@ def login_user(request, *args, **kwargs):
             return redirect('home')
         else:
             error_message = "Incorrect username or password provided."
-            return render(request, 'authenticate/login.html', {'error_message':error_message})
+            messages.error(request, error_message)
+            # return render(request, 'authenticate/login.html', {'error_message':error_message})
+            return render(request, 'authenticate/login.html')
     elif 'password_reset' in kwargs:
         if kwargs['password_reset'] == "True":
             password_reset_message = "Your password has been successfully reset!"

@@ -1,36 +1,28 @@
-<ul class="nav">
-  <li class="navbar_username">
-    <span> {{ user.username }} </span>
-  </li>
-  <div class="navbar_links">
-    <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="{% url 'home' %}"
-        >Home</a
-      >
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'create_account' %}">Create Account</a>
-    </li>
-    {% if user.is_authenticated and has_budget %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'edit_budget' %}">Edit Budget</a>
-    </li>
-    {% else %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'add_categories' %}">Create Budget</a>
-    </li>
-    {% endif %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'add_transaction' %}">Add Transaction</a>
-    </li>
-    {% if user.is_authenticated %}
-    <li class="nav-item logout_container">
-      <a class="nav-link" href="{% url 'logout_user' %}">Logout</a>
-    </li>
-    {% else %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'login_user' %}">Login</a>
-    </li>
-    {% endif %}
+  <div class="mobile-menu-button">
+    <div class="mobile-menu-button__line"></div>
+    <div class="mobile-menu-button__line"></div>
+    <div class="mobile-menu-button__line"></div>
   </div>
-</ul>
+  <div class="navbar">
+    <nav class="navbar__links">
+      <p class="navbar__username">{{ user.username }}</p>
+      <a class="navbar__link" href="{% url 'home' %}">Home</a>
+      <a class="navbar__link" href="{% url 'create_account' %}">Create Account</a>
+      {% if user.is_authenticated and has_budget %}
+      <a class="navbar__link" href="{% url 'edit_budget' %}">Edit Budget</a>
+      {% else %}
+      <a class="navbar__link" href="{% url 'add_categories' %}">Create Budget</a>
+      {% endif %}
+      <a class="navbar__link" href="{% url 'add_transaction' %}"
+        >Add Transaction</a
+      >
+      {% if user.is_authenticated %}
+      <a class="navbar__link" href="{% url 'logout_user' %}">Logout</a>
+      {% else %}
+      <a class="navbar__link" href="{% url 'login_user' %}">Login</a>
+      {% endif %}
+    </nav>
+  </div>
+{% block script %}
+<script src="static/js/navbar.js"></script>
+{% endblock script %}

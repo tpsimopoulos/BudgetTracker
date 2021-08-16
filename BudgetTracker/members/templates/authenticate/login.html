@@ -2,20 +2,15 @@
 <link
   rel="stylesheet"
   type="text/css"
-  href="{% static 'css/budget/base.css' %}"
+  href="{% static 'css/base.css' %}"
 />
 <link
   rel="stylesheet"
   type="text/css"
-  href="{% static 'css/members/create_account.css' %}"
-/>
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="{% static 'css/members/login.css' %}"
+  href="{% static 'css/login.css' %}"
 />
 {% endblock stylesheet %} {% block content %}
-<div class="page_container">
+<div class="login_container">
   <div class="form_and_title_container">
     <h2 id="login_page_heading">Login</h2>
     <div class="form_container">
@@ -50,22 +45,22 @@
         <div class="fieldWrapper">
           <div class="svg_and_form_field">
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="icon icon-tabler icon-tabler-lock"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <rect x="5" y="11" width="14" height="10" rx="2" />
-              <circle cx="12" cy="16" r="1" />
-              <path d="M8 11v-4a4 4 0 0 1 8 0v4" />
-            </svg>
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-lock"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <rect x="5" y="11" width="14" height="10" rx="2" />
+            <circle cx="12" cy="16" r="1" />
+            <path d="M8 11v-4a4 4 0 0 1 8 0v4" />
+          </svg>
             <input
               type="password"
               id="password"
@@ -73,11 +68,18 @@
               name="password"
               placeholder="Password"
             />
-            <a id=forgot_password_link href="{% url 'reset_password' %}">Forgot Password?</a>
           </div>
         </div>
+        <a id=forgot_password_link href="{% url 'reset_password' %}">Forgot Password?</a>
         <input type="submit" value="Submit" />
-        <span id="error_message">{{error_message}}</span>
+          {% if messages %}
+            <div id="login_error_message">
+              {% for message in messages %}
+                <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        <!-- <span id="error_message">{{error_message}}</span> -->
         <span id="password_reset_message">{{password_reset_message}}</span>
         {% csrf_token %}
       </form>

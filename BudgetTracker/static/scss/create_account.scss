@@ -1,0 +1,95 @@
+@use "mixins";
+
+.form_container {
+  @include mixins.flexDirectionColumn();
+  width: 100%;
+  padding-top: 3em;
+  /* border: 1px solid red; */
+}
+
+.form_and_title_container {
+  @include mixins.flexDirectionColumn(flex-start);
+  height: 50vh;
+  /* border: 1px solid red; */
+}
+
+.form_container {
+  @include mixins.flexDirectionColumn();
+  width: 85%;
+  /* border: 1px solid red; */
+}
+
+.form_fields_container {
+  @include mixins.flexDirectionColumn();
+  width: 100%;
+  /* border: 1px solid red; */
+}
+
+.form-control {
+  border-radius: 1em;
+  font-family: robotoRegular;
+}
+
+.fieldWrapper {
+  margin-bottom: 1em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* border: 1px solid blue; */
+}
+
+.svg_and_form_field {
+  display: flex;
+  align-items: center;
+  /* border: 2px solid turquoise; */
+}
+
+svg {
+  position: absolute;
+  padding-left: 0.25em;
+  /* border: 1px solid red; */
+}
+
+input[value="Submit"] {
+  background-color: #9bb0a5;
+  color: #fffff0;
+  font-family: robotoBold;
+  width: 100%;
+  border-radius: 1em;
+  border-style: solid;
+  border-color: #9bb0a5;
+  box-shadow: 0 3px 10px rgba(0, 0, 0 , 0.2)
+}
+
+input:not([value="Submit"]) {
+  text-indent: 1em;
+  /* border: 2px solid green; */
+}
+
+input:not([value="Submit"]):focus {
+  border: 2px solid #9bb0a5;
+  outline: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0 , 0.2)
+}
+
+.error_field {
+  /* border: 1px solid blue; */
+  height: 30%;
+}
+
+li {
+  font-family: robotoRegular;
+  font-size: small;
+  font-weight: bold;
+  align-self: center;
+  color: #384b41;
+}
+
+.create_account_link_container {
+  display: flex;
+  font-family: robotoRegular;
+  font-size: small;
+  width: 75%;
+  border: 1px solid red;
+}

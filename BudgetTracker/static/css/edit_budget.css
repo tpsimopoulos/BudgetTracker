@@ -1,0 +1,33 @@
+.page_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  padding-top: 3em;
+  font-family: robotoBold;
+  color: #384b41;
+  border: 1px solid red;
+}
+
+label {
+  font-family: robotoBold;
+  font-size: large;
+  color: #384b41;
+}
+
+#id_actions {
+  font-family: robotoRegular;
+  color: #384b41;
+  cursor: pointer;
+}
+/*# sourceMappingURL=edit_budget.css.map */

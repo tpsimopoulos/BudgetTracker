@@ -1,4 +1,4 @@
-.page_container {
+.form_container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,11 +15,6 @@
   align-items: center;
   height: 50vh;
   /* border: 1px solid red; */
-}
-
-h2 {
-  font-family: robotoBold;
-  color: #384b41;
 }
 
 .form_container {
@@ -66,7 +61,7 @@ svg {
   /* border: 1px solid red; */
 }
 
-input[value="Submit"] {
+input[value=Submit] {
   background-color: #9bb0a5;
   color: #fffff0;
   font-family: robotoBold;
@@ -74,18 +69,18 @@ input[value="Submit"] {
   border-radius: 1em;
   border-style: solid;
   border-color: #9bb0a5;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
-input:not([value="Submit"]) {
+input:not([value=Submit]) {
   text-indent: 1em;
   /* border: 2px solid green; */
 }
 
-input:not([value="Submit"]):focus {
+input:not([value=Submit]):focus {
   border: 2px solid #9bb0a5;
   outline: none;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 .error_field {
@@ -100,3 +95,13 @@ li {
   align-self: center;
   color: #384b41;
 }
+
+.create_account_link_container {
+  display: flex;
+  font-family: robotoRegular;
+  font-size: small;
+  width: 75%;
+  border: 1px solid red;
+}
+
+/*# sourceMappingURL=create_account.css.map */
