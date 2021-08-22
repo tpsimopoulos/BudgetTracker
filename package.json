@@ -19,5 +19,8 @@
   "homepage": "https://github.com/tpsimopoulos/BudgetTracker#readme",
   "devDependencies": {
     "sass": "^1.37.5"
+  },
+  "dependencies": {
+    "sanitize.css": "^12.0.1"
   }
 }

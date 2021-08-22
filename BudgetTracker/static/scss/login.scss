@@ -3,28 +3,45 @@
 
 .login_container {
   @include mixins.flexDirectionColumn();
-  width: 100%;
-  padding-top: 3em;
-  // border: 1px solid red;
+  width: inherit;
+  height: 100%;
+  // border: 2px solid red;
 }
 
 .form_and_title_container {
-  @include mixins.flexDirectionColumn(flex-start);
+  @include mixins.flexDirectionColumn();
   height: 50vh;
-  border: 1px solid blue; 
-}
+  border-radius: .5em;
+  border-style: none;
+  border-color: #9bb0a5;
+  box-shadow: 0 3px 10px rgba(0, 0, 0 , 0.2);
+  color: variables.$accent-clr;
+  // border: 1px solid blue; 
 
+  @include mixins.forSmallPhones() {
+    width: 50%;
+  }
+
+  @include mixins.forTablets() {
+    width: 35%;
+  }
+
+  @include mixins.forDesktop() {
+    width: 25%;
+  }
+}
 
 .form_container {
   @include mixins.flexDirectionColumn();
   width: 85%;
+  margin-top: 1rem;
   // border: 1px solid red;
 }
 
 .form_fields_container {
   @include mixins.flexDirectionColumn();
   width: 100%;
-  margin-bottom: 3em;
+  margin-bottom: 3rem;
   // border: 1px solid blue;
 }
 
@@ -34,12 +51,15 @@
 }
 
 .fieldWrapper {
-  margin-bottom: 1em;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* border: 1px solid blue; */
+  // border: 1px solid blue;
+}
+
+.fieldWrapper:nth-of-type(1){
+  margin-bottom: 1rem;
 }
 
 .svg_and_form_field {
@@ -50,13 +70,25 @@
 
 svg {
   position: absolute;
-  padding-left: 0.25em;
+  padding-left: 0.25rem;
 
   &.icon-tabler-lock {
     align-self: flex-start;
-    margin-top: 0.5em;
+    margin-top: 0.5rem;
   }
   /* border: 1px solid red; */
+}
+
+#forgot_password_link {
+  align-self: flex-start;
+  margin-top: .25rem;
+  margin-bottom: 2rem;
+  // font-size: .85em;
+  font-family: variables.$ff-reg;
+  color: variables.$accent-clr;
+  text-decoration: none;
+  // border: 1px solid red;
+
 }
 
 input[value="Submit"] {
@@ -72,7 +104,7 @@ input[value="Submit"] {
 
 input:not([value="Submit"]) {
   text-indent: 1em;
-  /* border: 2px solid green; */
+  // border: 2px solid green; 
 }
 
 input:not([value="Submit"]):focus {
@@ -88,14 +120,20 @@ input:not([value="Submit"]):focus {
   // border: 1px solid blue;
 }
 
-.sign_up_link {
+.create_account_link_container > span {
   font-family: variables.$ff-reg;
-  font-size: small;
+  color: variables.$accent-clr;
+  // border: 1px solid red;
+}
+
+.sign_up_link {
+  margin-left: .25rem;
+  font-family: variables.$ff-bold;
   color: variables.$accent-clr;
 
   &:hover {
-    font-weight: bold;
     color: variables.$accent-clr;
+    text-decoration: none;
   }
 }
 

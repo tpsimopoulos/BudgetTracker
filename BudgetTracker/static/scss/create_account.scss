@@ -1,28 +1,60 @@
 @use "mixins";
+@use "variables";
 
-.form_container {
+
+.page_container {
   @include mixins.flexDirectionColumn();
-  width: 100%;
-  padding-top: 3em;
-  /* border: 1px solid red; */
+  height: 100%;
+  // border: 1px solid blue;
 }
 
 .form_and_title_container {
   @include mixins.flexDirectionColumn(flex-start);
   height: 50vh;
-  /* border: 1px solid red; */
+  border-radius: .5em;
+  border-style: none;
+  border-color: #9bb0a5;
+  box-shadow: 0 3px 10px rgba(0, 0, 0 , 0.2);
+  // border: 2px solid blue; 
+
+  @include mixins.forSmallPhones() {
+    width: 50%;
+    
+    h1 {
+      text-align: center;
+    }
+  }
+
+  @include mixins.forTablets() {
+    width: 40%;
+    
+    h1 {
+      text-align: center;
+    }
+  }
+
+  @include mixins.forDesktop() {
+    width: 30%;
+
+  }
+}
+
+.form_and_title_container > h1 {
+  padding-top: 2rem;
+  color: variables.$accent-clr;  
 }
 
 .form_container {
   @include mixins.flexDirectionColumn();
-  width: 85%;
-  /* border: 1px solid red; */
+  width: 65%;
+  padding-top: 2rem;
+  // border: 1px solid red;
 }
 
 .form_fields_container {
   @include mixins.flexDirectionColumn();
   width: 100%;
-  /* border: 1px solid red; */
+  // border: 1px solid red; 
 }
 
 .form-control {
@@ -59,7 +91,8 @@ input[value="Submit"] {
   border-radius: 1em;
   border-style: solid;
   border-color: #9bb0a5;
-  box-shadow: 0 3px 10px rgba(0, 0, 0 , 0.2)
+  box-shadow: 0 3px 10px rgba(0, 0, 0 , 0.2);
+  margin-top: 1rem;
 }
 
 input:not([value="Submit"]) {

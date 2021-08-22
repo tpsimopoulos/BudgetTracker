@@ -5,7 +5,9 @@
   </div>
   <div class="navbar">
     <nav class="navbar__links">
-      <p class="navbar__username">{{ user.username }}</p>
+      {% if user.username %}
+        <p class="navbar__username">{{ user.username }}</p>
+      {% endif %}
       <a class="navbar__link" href="{% url 'home' %}">Home</a>
       <a class="navbar__link" href="{% url 'create_account' %}">Create Account</a>
       {% if user.is_authenticated and has_budget %}

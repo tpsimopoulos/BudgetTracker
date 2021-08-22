@@ -1,37 +1,60 @@
 @use "variables";
 @use "mixins";
 
+//--------- Base Styles ---------//
+
+
 html {
-  padding: 0;
   margin: 0;
-  height:100%; 
-  box-sizing: border-box;
+  padding: 0;
+  height: 100%; 
 }
+
+
+//--------- Body Styles ---------//
+
 
 body {
   display: flex;
-  min-height: 100%;
   background-color: variables.$primary-clr;
-  // border: 5px solid peru;
+  min-height: 100%;
+  width: 100%;
 }
 
-h2 {
+header {
+  height: inherit;
+}
+
+main {
+  height: inherit;
+  width: inherit;
+}
+
+h1 {
   font-family: variables.$ff-bold;
 }
 
 .navbar {
-  @include mixins.flexDirectionColumn(flex-start);
+  @include mixins.flexDirectionColumn();
   background-color: variables.$secondary-clr;
-  padding-top: 2em;
-  text-align: center;
-  min-width: 15%;
-  height: 100vh;
   font-family: variables.$ff-bold;
+  min-height: 100%;
 
   &__links {
-    @include mixins.flexDirectionColumn();
-    width: 100%;
-    // border: 1px solid red;
+    @include mixins.flexDirectionColumn(space-evenly);
+    font-size: 1.5rem;
+    text-align: center;
+    width: 15vw;
+    height: 90vh;
+
+    @include mixins.forTablets(){
+      width: 20vw;
+    }
+
+    @include mixins.forDesktop(){
+      width: 15vw;
+    }
+
   }
 
   &__username {
@@ -40,8 +63,8 @@ h2 {
 
   &__link {
     color: variables.$primary-clr;
-    font-size: large;
     padding-top: 1em;
+
     &:hover {
       color: variables.$accent-clr;
       text-decoration: none;
@@ -55,94 +78,103 @@ h2 {
 .mobile-menu-button {
   display: none;
 
-  & > &__line {
-    width: 25px;
-    height: 3px;
-    font-family: variables.$ff-bold;
+  &__line {
     background-color: variables.$accent-clr;
+    font-family: variables.$ff-bold;
     margin: 5px;
+    height: 3px;
+    width: 25px;
   }
 }
 
-@media screen and (max-width:768px){
 
+//--------- Media Queries ---------//
+
+
+@include mixins.forSmallPhones() {
   body {
-    overflow: hidden;
-  }
-
-  // mobile //
-  .mobile-menu-button {
-    display: block;
-    position: absolute;
-    top: .75em;
-    left: 2.5em;
-    z-index: 2;
-
-    & > &__line {
-      width: 25px;
-      height: 3px;
-      background-color: variables.$accent-clr;
-      cursor: pointer;
+      overflow: hidden;
     }
-
-    .toggle &__line:nth-of-type(1) {
-      transform: rotate(-45deg) translate(-5px, 6px);
+  
+    .mobile-menu-button {
+      display: block;
+      position: absolute;
+      top: .75em;
+      left: 2.5em;
+      z-index: 2;
+  
+      &__line {
+        background-color: variables.$accent-clr;
+        height: 3px;
+        width: 25px;
+        cursor: pointer;
+      }
+    }
+  
+    .toggle .mobile-menu-button__line:nth-of-type(1) {
       background-color: variables.$primary-clr;
+      transform: rotate(-45deg) translate(-5px, 6px);
     }
-
-    .toggle &__line:nth-of-type(2) {
+  
+    .toggle .mobile-menu-button__line:nth-of-type(2) {
       opacity: 0;
     }
-
-    .toggle &__line:nth-of-type(3) {
-      transform: rotate(45deg) translate(-5px, -6px);
+  
+    .toggle .mobile-menu-button__line:nth-of-type(3) {
       background-color: variables.$primary-clr;
+      transform: rotate(45deg) translate(-5px, -6px);
     }
-  }
-
-  .navbar {
-    visibility: hidden;
-    position: absolute;
-    z-index: 1;
-    flex-direction: column;
-    min-width: clamp(25vw, 40vw, 50vw);
-    border: 1px solid red;
-    height: 100vh;
-    left: -100%;
-    // transform: translateX(-100%);
-    transition: visibility 0.5s linear, transform 0.5s linear;
-    
-    &__links {
-      @include mixins.flexDirectionColumn(space-around);
-      position: absolute;
-      background-color: variables.$secondary-clr;
-      top: 0;
-      height: 100%;
+  
+    .navbar {
+      flex-direction: column;
       visibility: hidden;
-    }
-
-    &__username {
-      color: variables.$accent-clr;
-      padding-top: 3em;
-    }
-
-    &__link {
-      padding-top: 0;
-      &:hover {
+      position: absolute;
+      left: -100%;
+      z-index: 1;
+      height: 100vh;
+      min-width: clamp(25vw, 40vw, 50vw);
+      transform: translateX(-100%);
+      transition: visibility 0.5s linear, transform 0.5s linear;
+      
+      &__links {
+        @include mixins.flexDirectionColumn(space-around);
+        background-color: variables.$secondary-clr;
+        font-size: 1.25rem;
+        visibility: hidden;
+        position: absolute;
+        top: 0;
+        height: 90vh;
+        border: 2px solid red;
+      }
+  
+      &__username {
         color: variables.$accent-clr;
-        text-decoration: none;
+        padding-top: 3em;
+        width: 150px;
       }
-      &:not(&:first-of-type) {
+  
+      &__link {
         padding-top: 0;
+        border: 1px solid red;
+        width: 100px;
+        &:hover {
+          color: variables.$accent-clr;
+          text-decoration: none;
+        }
+        &:not(&:first-of-type) {
+          padding-top: 0;
+        }
       }
     }
-   
-  }
-}
+  } 
+  
+
+//--------- Styles Added By JS ---------//
+
 
 .navbar-active {
-  visibility:visible;
-  // transform: translateX(0%);
+  visibility: visible;
+  transform: translateX(0%);
   left: 0%;
 }
 

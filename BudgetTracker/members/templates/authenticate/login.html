@@ -12,7 +12,7 @@
 {% endblock stylesheet %} {% block content %}
 <div class="login_container">
   <div class="form_and_title_container">
-    <h2 id="login_page_heading">Login</h2>
+    <h1 id="login_page_heading">Login</h1>
     <div class="form_container">
       <form class="form_fields_container" action="{% url 'login_user' %}" method="POST">
         <div class="fieldWrapper">
@@ -33,7 +33,7 @@
               <circle cx="12" cy="7" r="4" />
               <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
             </svg>
-            <input
+              <input
               type="username"
               id="username"
               class="form-control"
@@ -62,11 +62,11 @@
             <path d="M8 11v-4a4 4 0 0 1 8 0v4" />
           </svg>
             <input
-              type="password"
-              id="password"
-              class="form-control"
-              name="password"
-              placeholder="Password"
+            type="password"
+            id="password"
+            class="form-control"
+            name="password"
+            placeholder="Password"
             />
           </div>
         </div>
@@ -84,7 +84,7 @@
         {% csrf_token %}
       </form>
       <div class="create_account_link_container">
-        <span>Don't have an account?</span><a class="sign_up_link" href="{% url 'create_account' %}">Sign Up</a>
+        <span>Don't have an account?<a class="sign_up_link" href="{% url 'create_account' %}">Sign Up</a></span>
       </div>
       {% endblock content %}
     </div>

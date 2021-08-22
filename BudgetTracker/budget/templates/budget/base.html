@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Bootstrap CSS -->
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link href="https://unpkg.com/sanitize.css/typography.css" rel="stylesheet" />
+    <link href="https://unpkg.com/sanitize.css/forms.css" rel="stylesheet" />
+    <link href="https://unpkg.com/sanitize.css/assets.css" rel="stylesheet" />
+    <link href="https://unpkg.com/sanitize.css/page.css" rel="stylesheet" />
+    <link href="https://unpkg.com/sanitize.css/reduce-motion.css" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -15,18 +19,19 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css"
     />
-    {% load static %} {% block stylesheet %}
-    {% endblock stylesheet %} 
-    {% block links %} 
-    {% endblock links %} 
-    {% block title %} 
-    {% endblock title %}
-    {% block google_charts %}
-    {% endblock google_charts %}
+    {% load static %}
+    {% block stylesheet %}{% endblock stylesheet %} 
+    {% block links %}{% endblock links %} 
+    {% block title %}{% endblock title %}
+    {% block google_charts %}{% endblock google_charts %}
   </head>
   <body>
+    <header>
       {% include "budget/navbar.html" %}
+    </header>
+    <main>
       {% block content %} {% endblock content %}
+    </main>
   </body>
   <script
     src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

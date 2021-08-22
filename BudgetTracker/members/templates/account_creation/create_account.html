@@ -12,10 +12,10 @@
 {% endblock stylesheet %} {% block content %}
 <div class="page_container">
   {% if user.is_authenticated %}
-  <h2 id="has_existing_account_message" class="text-center">Account already exists for {{user.username}}</h2>
+  <h1 id="has_existing_account_message" class="text-center">Account already exists for {{user.username}}</h1>
   {% else %}
   <div class="form_and_title_container">
-    <h2 id="create_account_page_heading">Create an Account</h2>
+    <h1 id="create_account_page_heading">Create an Account</h1>
     <div class="form_container">
       <form class="form_fields_container" action="" method="POST">
         {{ form.non_field_errors }}

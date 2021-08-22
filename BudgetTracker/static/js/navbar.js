@@ -14,7 +14,6 @@ const showNavbar = () => {
                 link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + .5}s`;
             }
         });
-
     });
 }
 
