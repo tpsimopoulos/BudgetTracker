@@ -10,6 +10,7 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
+  box-sizing: border-box;
 }
 
 body {
@@ -17,15 +18,18 @@ body {
   background-color: #fffff0;
   min-height: 100%;
   width: 100%;
+
 }
 
 header {
   height: inherit;
+  width: 15%;
+
 }
 
 main {
   height: inherit;
-  width: inherit;
+  width: 85%;
 }
 
 h1 {
@@ -33,13 +37,10 @@ h1 {
 }
 
 .navbar {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: #9bb0a5;
   font-family: robotoBold;
-  min-height: 100%;
+  width: 100%;
+  height: 100%;
 }
 .navbar__links {
   display: flex;
@@ -47,33 +48,25 @@ h1 {
   justify-content: space-evenly;
   align-items: center;
   font-size: 1.5rem;
-  text-align: center;
-  width: 15vw;
-  height: 90vh;
-}
-@media all and (min-width: 768px) {
-  .navbar__links {
-    width: 20vw;
-  }
-}
-@media all and (min-width: 1200px) {
-  .navbar__links {
-    width: 15vw;
-  }
+  height: inherit;
+  width: inherit;
+  
 }
 .navbar__username {
   color: #384b41;
 }
 .navbar__link {
   color: #fffff0;
-  padding-top: 1em;
+  padding-top: 1rem;
+
+  text-align: center;
 }
 .navbar__link:hover {
   color: #384b41;
   text-decoration: none;
 }
 .navbar__link:not(.navbar__link:first-of-type) {
-  padding-top: 1em;
+  padding-top: 1rem;
 }
 
 .mobile-menu-button {
@@ -95,8 +88,8 @@ h1 {
   .mobile-menu-button {
     display: block;
     position: absolute;
-    top: 0.75em;
-    left: 2.5em;
+    top: 0.75rem;
+    left: 2.5rem;
     z-index: 2;
   }
   .mobile-menu-button__line {
@@ -146,7 +139,7 @@ h1 {
   }
   .navbar__username {
     color: #384b41;
-    padding-top: 3em;
+    padding-top: 3rem;
     width: 150px;
   }
   .navbar__link {

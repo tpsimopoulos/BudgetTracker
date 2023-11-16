@@ -1,6 +1,7 @@
 @use "variables";
 @use "mixins";
 
+
 //--------- Base Styles ---------//
 
 
@@ -8,6 +9,8 @@ html {
   margin: 0;
   padding: 0;
   height: 100%; 
+  box-sizing: border-box;
+  // border: 3px solid blue;
 }
 
 
@@ -19,15 +22,18 @@ body {
   background-color: variables.$primary-clr;
   min-height: 100%;
   width: 100%;
+  border: 5px solid purple;
 }
 
 header {
   height: inherit;
+  width: 15%;
+  border: 1px solid blue;
 }
 
 main {
   height: inherit;
-  width: inherit;
+  width: 85%;
 }
 
 h1 {
@@ -35,25 +41,26 @@ h1 {
 }
 
 .navbar {
-  @include mixins.flexDirectionColumn();
   background-color: variables.$secondary-clr;
   font-family: variables.$ff-bold;
-  min-height: 100%;
+  width: 100%;
+  height: 100%;
+  // border: 2px solid brown;
 
   &__links {
-    @include mixins.flexDirectionColumn(space-evenly);
+    @include mixins.flexDirectionColumn(space-evenly, center);
     font-size: 1.5rem;
-    text-align: center;
-    width: 15vw;
-    height: 90vh;
+    height: inherit;
+    width: inherit;
+    border: 1px solid magenta;
 
-    @include mixins.forTablets(){
-      width: 20vw;
-    }
+    // @include mixins.forTablets(){
+    //   width: 20%;
+    // }
 
-    @include mixins.forDesktop(){
-      width: 15vw;
-    }
+    // @include mixins.forDesktop(){
+    //   width: 100%;
+    // }
 
   }
 
@@ -63,14 +70,16 @@ h1 {
 
   &__link {
     color: variables.$primary-clr;
-    padding-top: 1em;
+    padding-top: 1rem;
+    border: 1px solid red;
+    text-align: center;
 
     &:hover {
       color: variables.$accent-clr;
       text-decoration: none;
     }
     &:not(&:first-of-type) {
-      padding-top: 1em;
+      padding-top: 1rem;
     }
   }
 }
@@ -99,8 +108,8 @@ h1 {
     .mobile-menu-button {
       display: block;
       position: absolute;
-      top: .75em;
-      left: 2.5em;
+      top: .75rem;
+      left: 2.5rem;
       z-index: 2;
   
       &__line {
@@ -149,7 +158,7 @@ h1 {
   
       &__username {
         color: variables.$accent-clr;
-        padding-top: 3em;
+        padding-top: 3rem;
         width: 150px;
       }
   

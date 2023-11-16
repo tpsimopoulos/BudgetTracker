@@ -10,7 +10,7 @@
 
 .form_and_title_container {
   @include mixins.flexDirectionColumn();
-  height: 50vh;
+  // height: 50vh;
   border-radius: .5em;
   border-style: none;
   border-color: #9bb0a5;
@@ -34,6 +34,7 @@
 .form_container {
   @include mixins.flexDirectionColumn();
   width: 85%;
+  height: 40vh;
   margin-top: 1rem;
   // border: 1px solid red;
 }
@@ -42,7 +43,7 @@
   @include mixins.flexDirectionColumn();
   width: 100%;
   margin-bottom: 3rem;
-  // border: 1px solid blue;
+  border: 1px solid blue;
 }
 
 .form-control {

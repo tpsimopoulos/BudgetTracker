@@ -36,8 +36,8 @@ def index(request, *args, **kwargs):
                 pie_transactions = [['Category', 'Amount Spent']]
                 for k,v in category_totals.items():
                     pie_transactions.append([k,v])
-                pie_transactions = json.dumps(pie_transactions)
-                
+                pie_transactions = json.dumps(pie_transactions, default=str)
+            
                 # Fetching data for Table Chart
                 table_transactions = [['Transaction Date', 'Category', 'Amount Spent']]
                 for trx in user_transactions:
